@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="estudo-spring" uuid="ca4e5191-ea51-4ffc-b006-8138dcc46610">
+      <secret-storage>master_key</secret-storage>
+      <user-name>guilherme</user-name>
+      <schema-pattern>estudo-spring.*</schema-pattern>
+      <default-schemas>estudo-spring.*</default-schemas>
+    </data-source>
+  </component>
+</project>
