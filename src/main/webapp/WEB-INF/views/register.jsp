@@ -1,3 +1,6 @@
+<%--suppress ALL --%>
+<%--suppress HtmlUnknownTarget --%>
+<%--suppress XmlDuplicatedId --%>
 <%--
   Created by IntelliJ IDEA.
   User: Guilherme
@@ -19,37 +22,41 @@
     <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>--%>
 </head>
 <body class="container">
-    <%--${spring:mvcUrl('saveBook').build()}--%>
 
     <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"><a href="books">Voltar</a></span>
 
     <h3>Cadastro de Livro</h3>
     ${mensagem}
-    <form class="row col-md-4" action="save" method="post">
+
+    <form:form action="${spring:mvcUrl('saveBook').build()}" commandName="bookDTO" cssClass="row col-md-4" method="post">
 
         <div class="form-group">
             <label for="isbn">ISBN</label>
-            <input class="form-control" id="isbn" type="text" name="isbn" maxlength="13"/>
+            <form:input path="isbn" id="field_isbn" cssClass="form-control" maxlength="13"/>
+            <form:errors path="isbn" cssClass="bg-danger"/>
         </div>
 
         <div class="form-group">
             <label for="title">Título</label>
-            <input class="form-control" id="title" type="text" name="title"/>
+            <form:input path="title" id="field_title" cssClass="form-control"/>
+            <form:errors path="title" cssClass="bg-danger"/>
         </div>
 
         <div class="form-group">
             <label for="author">Autor</label>
-            <input class="form-control" id="author" type="text" name="author"/>
+            <form:input path="author" id="field_author" cssClass="form-control"/>
+            <form:errors path="author" cssClass="bg-danger"/>
         </div>
 
         <div class="form-group">
             <label for="edition">Edição</label>
-            <input class="form-control" id="edition" type="text" name="edition" maxlength="2"/>
+            <form:input path="edition" id="field_edition" cssClass="form-control" maxlength="2"/>
+            <form:errors path="edition" cssClass="bg-danger"/>
         </div>
 
         <div class="form-group">
-            <input class="btn btn-default" type="submit" value="Cadastrar">
+            <input class="btn btn-default" type="submit" value="Cadastrar livro">
         </div>
-    </form>
+    </form:form>
 </body>
 </html>

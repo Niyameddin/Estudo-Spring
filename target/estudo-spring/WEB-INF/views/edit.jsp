@@ -16,17 +16,19 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>--%>
 </head>
 <body class="container">
     <%--${spring:mvcUrl('saveBook').build()}--%>
+    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"><a href="/bookcase/books">Voltar</a></span>
+
     <h3>Edição de Livro</h3>
     ${mensagem}
     <form class="row col-md-4" action="/bookcase/update" method="post">
 
         <div class="form-group">
             <label for="isbn">ISBN</label>
-            <input class="form-control" id="isbn" type="text" name="isbn" maxlength="13" value="${book.isbn}"/>
+            <input class="form-control" id="isbn" type="text" name="isbn" maxlength="13" value="${book.isbn}" readonly/>
         </div>
 
         <div class="form-group">

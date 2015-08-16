@@ -1,6 +1,8 @@
 package controller;
 
 import entity.Book;
+import entity.BookDTO;
+import entity.factory.BookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import persistence.BookDao;
+import persistence.service.BookRepositoryService;
 
-import javax.transaction.Transactional;
+import javax.validation.UnexpectedTypeException;
+import javax.validation.Valid;
 import java.util.Optional;
 
 /**
@@ -22,89 +25,105 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/bookcase")
-@Transactional
 public class BookController {
     @Autowired
-    BookDao bookDao;
+    BookFactory bookFactory;
+
+    @Autowired
+    BookRepositoryService bookRepositoryService;
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String showForm(Model model, @ModelAttribute("book") Book book) {
-        model.addAttribute("book", book);
+    public String showForm(Model model, @ModelAttribute("book") BookDTO bookDTO) {
+        model.addAttribute("bookDTO", bookDTO);
         return "register";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(Book book, BindingResult result, RedirectAttributes redirectAttributes) {
-        if (result.hasFieldErrors()) {
-            System.out.println("Houve erros no formul·rio.");
-            return "redirect:register";
+    @RequestMapping(value = "/save", method = RequestMethod.POST, name = "saveBook")
+    public String save(@Valid BookDTO bookDTO, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return "register";
+        } else {
+            try {
+                Book book = bookFactory.createBook(bookDTO);
+                bookRepositoryService.saveEntity(book);
+                System.out.println("BookDao: Livro salvo com Sucesso! - " + book);
+                redirectAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso");
+                redirectAttributes.addFlashAttribute("cssStyle", "alert alert-success");
+            } catch (UnexpectedTypeException ute) {
+                System.err.println(ute.getMessage());
+                return "redirect:register";
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return "redirect:register";
+            }
+            return "redirect:books";
         }
-        try {
-            bookDao.save(book);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        System.out.println("BookDao: Livro salvo com Sucesso! - " + book);
-        redirectAttributes.addFlashAttribute("mensagem", "Livro cadastrado com sucesso");
-        return "redirect:books";
     }
 
     @RequestMapping(value = "/edit/{isbn}", method = RequestMethod.GET)
-    public String edit(@PathVariable String isbn, Model model, @ModelAttribute("book") Book book,
+    public String edit(@PathVariable String isbn, Model model, @ModelAttribute("book") BookDTO bookDTO,
                        RedirectAttributes redirectAttributes) {
         try {
-            Optional<Book> returnedBook = bookDao.findOne(new Long(isbn));
+            Optional<Book> returnedBook = bookRepositoryService.findEntityById(new Long(isbn));
             if (returnedBook.isPresent()) {
-                book = returnedBook.get();
+                bookDTO = bookFactory.createBookDTO(returnedBook.get());
             } else {
-                redirectAttributes.addFlashAttribute("mensagem", "Livro n„o encontrado.");
+                redirectAttributes.addFlashAttribute("mensagem", "Livro n√£o encontrado.");
+                redirectAttributes.addFlashAttribute("cssStyle", "alert alert-warning");
                 return "redirect:/bookcase/books";
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        model.addAttribute("book", book);
+        model.addAttribute("book", bookDTO);
         return "edit";
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(Book book, BindingResult result, RedirectAttributes redirectAttributes) {
-        if (result.hasFieldErrors()) {
-            System.out.println("Houve erros no formul·rio.");
-            return "redirect:edit";
+    @RequestMapping(value = "/update", method = RequestMethod.POST, name = "updateBook")
+    public String update(@Valid @ModelAttribute("book") BookDTO bookDTO, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return "edit";
         }
         try {
-            bookDao.update(book);
+            Book book = bookFactory.createBook(bookDTO);
+            bookRepositoryService.updateEntity(book);
+            System.out.println("BookDao: Livro atualizado com Sucesso! - " + book);
+            redirectAttributes.addFlashAttribute("mensagem", "Livro atualizado com sucesso");
+            redirectAttributes.addFlashAttribute("cssStyle", "alert alert-success");
+        } catch (UnexpectedTypeException ute) {
+            System.err.println(ute.getMessage());
+            return "redirect:edit/"+bookDTO.getIsbn();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return "redirect:edit/"+bookDTO.getIsbn();
         }
-        System.out.println("BookDao: Livro atualizado com Sucesso! - " + book);
-        redirectAttributes.addFlashAttribute("mensagem", "Livro atualizado com sucesso");
         return "redirect:books";
     }
 
     @RequestMapping(value = "/delete/{isbn}", method = RequestMethod.POST)
     public String delete(@PathVariable String isbn, RedirectAttributes redirectAttributes) {
         try {
-            Optional<Book> returnedBook = bookDao.findOne(new Long(isbn));
+            Optional<Book> returnedBook = bookRepositoryService.findEntityById(new Long(isbn));
             if (returnedBook.isPresent()) {
                 Book book = returnedBook.get();
-                bookDao.delete(book);
+                bookRepositoryService.deleteEntity(book);
+                System.out.println("BookDao: Livro deletado com Sucesso! - " + isbn);
+                redirectAttributes.addFlashAttribute("mensagem", "Livro deletado com sucesso");
+                redirectAttributes.addFlashAttribute("cssStyle", "alert alert-success");
             } else {
-                redirectAttributes.addFlashAttribute("mensagem", "Livro n„o pode ser deletado.");
+                redirectAttributes.addFlashAttribute("mensagem", "Livro n√£o pode ser deletado.");
+                redirectAttributes.addFlashAttribute("cssStyle", "alert alert-warning");
                 return "redirect:/bookcase/books";
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("BookDao: Livro deletado com Sucesso! - " + isbn);
-        redirectAttributes.addFlashAttribute("mensagem", "Livro deletado com sucesso");
         return "redirect:/bookcase/books";
     }
 
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public String list(ModelMap model) throws Exception {
-        model.addAttribute("books", bookDao.findAll());
+        model.addAttribute("books", bookRepositoryService.findAllEntities());
         return "bookList";
     }
 }

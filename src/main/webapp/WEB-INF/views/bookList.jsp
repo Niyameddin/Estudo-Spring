@@ -24,7 +24,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Estudo-Spring</a>
+                <a class="navbar-brand" href="">Estudo-Spring</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="active">
@@ -38,7 +38,9 @@
     </nav>
     <section class="container">
         <h3 style="padding-top: 70px;">Listagem de livros</h3>
-        ${mensagem}
+
+        <div class="${cssStyle}" role="alert">${mensagem}</div>
+
         <table class="table table-hover table-bordered table-striped">
             <tr>
                 <td>ISBN</td>

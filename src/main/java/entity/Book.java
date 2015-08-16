@@ -1,9 +1,14 @@
 package entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -13,32 +18,39 @@ import java.io.Serializable;
 @Entity
 @Table(name = "book")
 public class Book implements Serializable {
-    private static final long serialVersionUID = 1521978423735821358L;
+    private static final Long serialVersionUID = 1521978423735821358L;
 
     @Id
     @Column(name = "isbn", unique = true, nullable = false, length = 13)
-    private long isbn;
+    @NotNull
+    private Long isbn;
 
     @Column(name = "title", nullable = false)
+    @NotEmpty
+    @NotBlank
     private String title;
 
     @Column(name = "author", nullable = false)
+    @NotEmpty
+    @NotBlank
     private String author;
 
     @Column(name = "edition", nullable = false)
+    @NotNull
+    @Min(1)
     private Integer edition;
 
     public Book() {
     }
 
-    public Book( long isbn,String title,String author, Integer edition) {
+    public Book( Long isbn,String title,String author, Integer edition) {
         this.author = author;
         this.edition = edition;
         this.isbn = isbn;
         this.title = title;
     }
 
-    public static long getSerialVersionUID() {
+    public static Long getSerialVersionUID() {
         return serialVersionUID;
     }
 
@@ -58,11 +70,11 @@ public class Book implements Serializable {
         this.edition = edition;
     }
 
-    public long getIsbn() {
+    public Long getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(long isbn) {
+    public void setIsbn(Long isbn) {
         this.isbn = isbn;
     }
 

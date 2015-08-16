@@ -9,6 +9,7 @@
     <url>http://maven.apache.org</url>
 
     <properties>
+        <project.build.sourceEncoding>cp1252</project.build.sourceEncoding>
         <org.springframework-version>4.1.7.RELEASE</org.springframework-version>
         <org.slf4j-version>1.6.1</org.slf4j-version>
         <jackson.version>1.9.13</jackson.version>
@@ -116,12 +117,12 @@
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>1.0.0.GA</version>
+            <version>1.1.0.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>4.1.0.Final</version>
+            <version>5.2.0.Final</version>
         </dependency>
 
         <!-- Jackson JSON Mapper -->
@@ -137,11 +138,21 @@
         <finalName>estudo-spring</finalName>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
+                    <encoding>cp1252</encoding>
                 </configuration>
             </plugin>
 
