@@ -8,7 +8,7 @@
   Time: 12:06
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=cp1252" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -37,7 +37,7 @@
         </div>
 
         <div class="form-group">
-            <label for="title">TÃ­tulo</label>
+            <label for="title">Título</label>
             <form:input path="title" id="field_title" cssClass="form-control"/>
             <form:errors path="title" cssClass="bg-danger"/>
         </div>
@@ -49,7 +49,7 @@
         </div>
 
         <div class="form-group">
-            <label for="edition">EdiÃ§Ã£o</label>
+            <label for="edition">Edição</label>
             <form:input path="edition" id="field_edition" cssClass="form-control" maxlength="2"/>
             <form:errors path="edition" cssClass="bg-danger"/>
         </div>

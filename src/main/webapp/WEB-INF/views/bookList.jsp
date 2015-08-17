@@ -6,11 +6,11 @@
   Time: 12:07
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=cp1252" language="java" %>
 <html>
 <head>
     <title>Listagem de livros</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=cp1252">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
@@ -46,7 +46,7 @@
                 <td>ISBN</td>
                 <td>Titulo</td>
                 <td>Autor</td>
-                <td class="col-md-1">EdiÃ§Ã£o</td>
+                <td class="col-md-1">Edição</td>
                 <td class="col-md-1">Editar</td>
                 <td class="col-md-1">Deletar</td>
 

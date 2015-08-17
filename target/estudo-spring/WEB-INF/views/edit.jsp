@@ -24,7 +24,7 @@
 
     <h3>Edição de Livro</h3>
     ${mensagem}
-    <form class="row col-md-4" action="/bookcase/update" method="post">
+    <form:form action="${spring:mvcUrl('updateBook').build()}" commandName="bookDTO" cssClass="row col-md-4" method="post">
 
         <div class="form-group">
             <label for="isbn">ISBN</label>
@@ -34,21 +34,24 @@
         <div class="form-group">
             <label for="title">Título</label>
             <input class="form-control" id="title" type="text" name="title" value="${book.title}"/>
+            <form:errors path="title" cssClass="bg-danger"/>
         </div>
 
         <div class="form-group">
             <label for="author">Autor</label>
             <input class="form-control" id="author" type="text" name="author" value="${book.author}"/>
+            <form:errors path="author" cssClass="bg-danger"/>
         </div>
 
         <div class="form-group">
             <label for="edition">Edição</label>
             <input class="form-control" id="edition" type="text" name="edition" maxlength="2" value="${book.edition}"/>
+            <form:errors path="edition" cssClass="bg-danger"/>
         </div>
 
         <div class="form-group">
-            <input class="btn btn-default" type="submit" value="Atualizar">
+            <input class="btn btn-default" type="submit" value="Atualizar livro">
         </div>
-    </form>
+    </form:form>
 </body>
 </html>
