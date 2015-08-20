@@ -51,17 +51,15 @@ public class BookController {
                 redirectAttributes.addFlashAttribute("cssStyle", "alert alert-success");
             } catch (UnexpectedTypeException ute) {
                 System.err.println(ute.getMessage());
-                return "redirect:register";
             } catch (Exception e) {
                 System.out.println(e.getMessage());
-                return "redirect:register";
             }
             return "redirect:books";
         }
     }
 
     @RequestMapping(value = "/edit/{isbn}", method = RequestMethod.GET)
-    public String edit(@PathVariable String isbn, Model model, @ModelAttribute("book") BookDTO bookDTO,
+    public String edit(@PathVariable String isbn, Model model, BookDTO bookDTO,
                        RedirectAttributes redirectAttributes) {
         try {
             Optional<Book> returnedBook = bookRepositoryService.findEntityById(new Long(isbn));
@@ -74,30 +72,30 @@ public class BookController {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        } finally {
+            model.addAttribute(bookDTO);
         }
-        model.addAttribute("book", bookDTO);
         return "edit";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST, name = "updateBook")
-    public String update(@Valid @ModelAttribute("book") BookDTO bookDTO, BindingResult result, RedirectAttributes redirectAttributes) {
+    public String update(@Valid BookDTO bookDTO, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "edit";
+        }else{
+            try {
+                Book book = bookFactory.createBook(bookDTO);
+                bookRepositoryService.updateEntity(book);
+                System.out.println("BookDao: Livro atualizado com Sucesso! - " + book);
+                redirectAttributes.addFlashAttribute("mensagem", "Livro atualizado com sucesso");
+                redirectAttributes.addFlashAttribute("cssStyle", "alert alert-success");
+            } catch (UnexpectedTypeException ute) {
+                System.err.println(ute.getMessage());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            return "redirect:books";
         }
-        try {
-            Book book = bookFactory.createBook(bookDTO);
-            bookRepositoryService.updateEntity(book);
-            System.out.println("BookDao: Livro atualizado com Sucesso! - " + book);
-            redirectAttributes.addFlashAttribute("mensagem", "Livro atualizado com sucesso");
-            redirectAttributes.addFlashAttribute("cssStyle", "alert alert-success");
-        } catch (UnexpectedTypeException ute) {
-            System.err.println(ute.getMessage());
-            return "redirect:edit/"+bookDTO.getIsbn();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return "redirect:edit/"+bookDTO.getIsbn();
-        }
-        return "redirect:books";
     }
 
     @RequestMapping(value = "/delete/{isbn}", method = RequestMethod.POST)
@@ -113,7 +111,6 @@ public class BookController {
             } else {
                 redirectAttributes.addFlashAttribute("mensagem", "Livro não pode ser deletado.");
                 redirectAttributes.addFlashAttribute("cssStyle", "alert alert-warning");
-                return "redirect:/bookcase/books";
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

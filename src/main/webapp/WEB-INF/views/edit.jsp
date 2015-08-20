@@ -1,3 +1,4 @@
+<%--suppress XmlDuplicatedId --%>
 <%--
   Created by IntelliJ IDEA.
   User: Guilherme
@@ -19,7 +20,7 @@
     <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>--%>
 </head>
 <body class="container">
-    <%--${spring:mvcUrl('saveBook').build()}--%>
+
     <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"><a href="/bookcase/books">Voltar</a></span>
 
     <h3>Edição de Livro</h3>
@@ -28,24 +29,24 @@
 
         <div class="form-group">
             <label for="isbn">ISBN</label>
-            <input class="form-control" id="isbn" type="text" name="isbn" maxlength="13" value="${book.isbn}" readonly/>
+            <form:input path="isbn" id="field_isbn" cssClass="form-control" maxlength="13" readonly="true"/>
         </div>
 
         <div class="form-group">
             <label for="title">Título</label>
-            <input class="form-control" id="title" type="text" name="title" value="${book.title}"/>
+            <form:input path="title" id="field_title" cssClass="form-control"/>
             <form:errors path="title" cssClass="bg-danger"/>
         </div>
 
         <div class="form-group">
             <label for="author">Autor</label>
-            <input class="form-control" id="author" type="text" name="author" value="${book.author}"/>
+            <form:input path="author" id="field_author" cssClass="form-control"/>
             <form:errors path="author" cssClass="bg-danger"/>
         </div>
 
         <div class="form-group">
             <label for="edition">Edição</label>
-            <input class="form-control" id="edition" type="text" name="edition" maxlength="2" value="${book.edition}"/>
+            <form:input path="edition" id="field_edition" cssClass="form-control" maxlength="2"/>
             <form:errors path="edition" cssClass="bg-danger"/>
         </div>
 
