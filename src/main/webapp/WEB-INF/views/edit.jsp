@@ -19,40 +19,42 @@
     <!-- Latest compiled and minified JavaScript -->
     <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>--%>
 </head>
-<body class="container">
+<body>
+    <jsp:include page="template/nav.jsp" />
 
-    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"><a href="/bookcase/books">Voltar</a></span>
+    <section class="container">
 
-    <h3>Edição de Livro</h3>
-    ${mensagem}
-    <form:form action="${spring:mvcUrl('updateBook').build()}" commandName="bookDTO" cssClass="row col-md-4" method="post">
+        <h3 style="padding-top: 70px;">Edição de Livro</h3>
+        ${mensagem}
+        <form:form action="${spring:mvcUrl('updateBook').build()}" commandName="bookDTO" cssClass="row col-md-4" method="post">
 
-        <div class="form-group">
-            <label for="isbn">ISBN</label>
-            <form:input path="isbn" id="field_isbn" cssClass="form-control" maxlength="13" readonly="true"/>
-        </div>
+            <div class="form-group">
+                <label for="isbn">ISBN</label>
+                <form:input path="isbn" id="field_isbn" cssClass="form-control" maxlength="13" readonly="true"/>
+            </div>
 
-        <div class="form-group">
-            <label for="title">Título</label>
-            <form:input path="title" id="field_title" cssClass="form-control"/>
-            <form:errors path="title" cssClass="bg-danger"/>
-        </div>
+            <div class="form-group">
+                <label for="title">Título</label>
+                <form:input path="title" id="field_title" cssClass="form-control"/>
+                <form:errors path="title" cssClass="bg-danger"/>
+            </div>
 
-        <div class="form-group">
-            <label for="author">Autor</label>
-            <form:input path="author" id="field_author" cssClass="form-control"/>
-            <form:errors path="author" cssClass="bg-danger"/>
-        </div>
+            <div class="form-group">
+                <label for="author">Autor</label>
+                <form:input path="author" id="field_author" cssClass="form-control"/>
+                <form:errors path="author" cssClass="bg-danger"/>
+            </div>
 
-        <div class="form-group">
-            <label for="edition">Edição</label>
-            <form:input path="edition" id="field_edition" cssClass="form-control" maxlength="2"/>
-            <form:errors path="edition" cssClass="bg-danger"/>
-        </div>
+            <div class="form-group">
+                <label for="edition">Edição</label>
+                <form:input path="edition" id="field_edition" cssClass="form-control" maxlength="2"/>
+                <form:errors path="edition" cssClass="bg-danger"/>
+            </div>
 
-        <div class="form-group">
-            <input class="btn btn-default" type="submit" value="Atualizar livro">
-        </div>
-    </form:form>
+            <div class="form-group">
+                <input class="btn btn-default" type="submit" value="Atualizar livro">
+            </div>
+        </form:form>
+    </section>
 </body>
 </html>

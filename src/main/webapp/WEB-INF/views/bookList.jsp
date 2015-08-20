@@ -15,27 +15,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="">Estudo-Spring</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="books">Livros</a>
-                </li>
-                <li>
-                    <a href="register">Cadastre um livro</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <jsp:include page="template/nav.jsp" />
+
     <section class="container">
         <h3 style="padding-top: 70px;">Listagem de livros</h3>
 
@@ -81,5 +62,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <%-------------%>
+
+    <jsp:include page="template/footer.jsp" />
 </body>
 </html>
