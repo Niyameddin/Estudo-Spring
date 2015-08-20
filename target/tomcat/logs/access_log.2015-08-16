@@ -1,8 +1,0 @@
-0:0:0:0:0:0:0:1 - - [16/Aug/2015:22:01:57 -0300] "GET /bookcase/books HTTP/1.1" 200 5838 http-bio-9090-exec-1 1439
-0:0:0:0:0:0:0:1 - - [16/Aug/2015:22:02:00 -0300] "GET /bookcase/edit/2222222222222 HTTP/1.1" 200 1635 http-bio-9090-exec-2 437
-0:0:0:0:0:0:0:1 - - [16/Aug/2015:22:02:05 -0300] "POST /bookcase/update HTTP/1.1" 302 - http-bio-9090-exec-3 293
-0:0:0:0:0:0:0:1 - - [16/Aug/2015:22:02:05 -0300] "GET /bookcase/books HTTP/1.1" 200 5886 http-bio-9090-exec-4 15
-0:0:0:0:0:0:0:1 - - [16/Aug/2015:22:03:13 -0300] "GET /bookcase/books HTTP/1.1" 200 5839 http-bio-9090-exec-1 363
-0:0:0:0:0:0:0:1 - - [16/Aug/2015:22:03:17 -0300] "GET /bookcase/edit/2222222222222 HTTP/1.1" 200 1629 http-bio-9090-exec-2 1079
-0:0:0:0:0:0:0:1 - - [16/Aug/2015:22:03:21 -0300] "POST /bookcase/update HTTP/1.1" 302 - http-bio-9090-exec-3 247
-0:0:0:0:0:0:0:1 - - [16/Aug/2015:22:03:21 -0300] "GET /bookcase/books HTTP/1.1" 200 5886 http-bio-9090-exec-4 27
