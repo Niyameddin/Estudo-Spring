@@ -4,6 +4,7 @@ import entity.Book;
 import entity.BookDTO;
 import entity.factory.BookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -117,7 +118,7 @@ public class BookController {
         }
         return "redirect:/bookcase/books";
     }
-
+    @CacheEvict(value = "books", allEntries=true)
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public String list(ModelMap model) throws Exception {
         model.addAttribute("books", bookRepositoryService.findAllEntities());

@@ -4,6 +4,10 @@ package config;
  * Created by Guilherme on 28/06/2015.
  */
 
+import com.google.common.cache.CacheBuilder;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,10 +18,13 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import java.util.concurrent.TimeUnit;
+
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"controller","entity","persistence","util"})
-public class AppWebConfiguration extends WebMvcConfigurerAdapter{
+@EnableCaching
+@ComponentScan(basePackages = {"controller", "entity", "persistence", "util"})
+public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 
     /*
      * Configure View Resolver
@@ -46,5 +53,15 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename("messages");
         return messageSource;
+    }
+
+    /*
+     * Configure caching manager
+     */
+    @Bean
+    public CacheManager cacheManager() {
+        GuavaCacheManager guavaCacheManager =  new GuavaCacheManager();
+        guavaCacheManager.setCacheBuilder(CacheBuilder.newBuilder().expireAfterAccess(5, TimeUnit.MINUTES));
+        return guavaCacheManager;
     }
 }

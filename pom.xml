@@ -4,7 +4,7 @@
     <groupId>com.spring</groupId>
     <artifactId>estudo-spring</artifactId>
     <packaging>war</packaging>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <name>estudo-spring Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
@@ -59,27 +59,27 @@
         </dependency>
         <!-- Logging -->
         <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>slf4j-api</artifactId>-->
-            <!--<version>${org.slf4j-version}</version>-->
+        <!--<groupId>org.slf4j</groupId>-->
+        <!--<artifactId>slf4j-api</artifactId>-->
+        <!--<version>${org.slf4j-version}</version>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>jcl-over-slf4j</artifactId>-->
-            <!--<version>${org.slf4j-version}</version>-->
-            <!--<scope>runtime</scope>-->
+        <!--<groupId>org.slf4j</groupId>-->
+        <!--<artifactId>jcl-over-slf4j</artifactId>-->
+        <!--<version>${org.slf4j-version}</version>-->
+        <!--<scope>runtime</scope>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>slf4j-log4j12</artifactId>-->
-            <!--<version>${org.slf4j-version}</version>-->
-            <!--<scope>runtime</scope>-->
+        <!--<groupId>org.slf4j</groupId>-->
+        <!--<artifactId>slf4j-log4j12</artifactId>-->
+        <!--<version>${org.slf4j-version}</version>-->
+        <!--<scope>runtime</scope>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>log4j</groupId>-->
-            <!--<artifactId>log4j</artifactId>-->
-            <!--<version>1.2.16</version>-->
-            <!--<scope>runtime</scope>-->
+        <!--<groupId>log4j</groupId>-->
+        <!--<artifactId>log4j</artifactId>-->
+        <!--<version>1.2.16</version>-->
+        <!--<scope>runtime</scope>-->
         <!--</dependency>-->
         <!-- configuracao jpa e driver -->
         <dependency>
@@ -136,6 +136,19 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${jackson-databind.version}</version>
+        </dependency>
+
+        <!-- cache -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${org.springframework-version}</version>
         </dependency>
     </dependencies>
 
