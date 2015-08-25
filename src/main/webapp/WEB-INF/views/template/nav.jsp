@@ -5,7 +5,7 @@
   Time: 22:53
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=cp1252" language="java" %>
 <html>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -21,11 +21,14 @@
                 <a class="navbar-brand" href="/bookcase/books">Estudo-Spring</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active">
+                <li>
                     <a href="/bookcase/books">Livros</a>
                 </li>
                 <li>
                     <a href="/bookcase/register">Cadastre um livro</a>
+                </li>
+                <li>
+                    <a href="/bookcase/api/books" target="_blank">API Livros</a>
                 </li>
             </ul>
         </div>
