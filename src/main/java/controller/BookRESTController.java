@@ -4,6 +4,8 @@ import entity.Book;
 import entity.BookDTO;
 import entity.factory.BookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,11 +30,13 @@ public class BookRESTController {
     @Autowired
     BookRepositoryService bookRepositoryService;
 
+    @Cacheable(value = "apibook")
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public List<BookDTO> list() throws Exception {
         return bookRepositoryService.findAllEntities();
     }
 
+    @Cacheable(value = "apibooks")
     @RequestMapping(value = "/books/{isbn}", method = RequestMethod.GET)
     public ResponseEntity<BookDTO> getBookById(@PathVariable("isbn") Long isbn) throws Exception {
         try {

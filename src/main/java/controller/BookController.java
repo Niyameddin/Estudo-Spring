@@ -5,6 +5,7 @@ import entity.BookDTO;
 import entity.factory.BookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -39,6 +40,7 @@ public class BookController {
         return "register";
     }
 
+    @CacheEvict(value = "books", allEntries = true)
     @RequestMapping(value = "/save", method = RequestMethod.POST, name = "saveBook")
     public String save(@Valid BookDTO bookDTO, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
@@ -79,6 +81,7 @@ public class BookController {
         return "edit";
     }
 
+    @CacheEvict(value = "books", allEntries = true)
     @RequestMapping(value = "/update", method = RequestMethod.POST, name = "updateBook")
     public String update(@Valid BookDTO bookDTO, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
@@ -99,6 +102,7 @@ public class BookController {
         }
     }
 
+    @CacheEvict(value = "books", allEntries = true)
     @RequestMapping(value = "/delete/{isbn}", method = RequestMethod.POST)
     public String delete(@PathVariable String isbn, RedirectAttributes redirectAttributes) {
         try {
@@ -118,7 +122,8 @@ public class BookController {
         }
         return "redirect:/bookcase/books";
     }
-    @CacheEvict(value = "books", allEntries=true)
+
+    @Cacheable(value = "books")
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public String list(ModelMap model) throws Exception {
         model.addAttribute("books", bookRepositoryService.findAllEntities());
