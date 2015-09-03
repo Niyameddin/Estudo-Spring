@@ -1,6 +1,8 @@
-<%--suppress ALL --%>
-<%--suppress HtmlUnknownTarget --%>
 <%--suppress XmlDuplicatedId --%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="customTags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Guilherme
@@ -8,22 +10,11 @@
   Time: 12:06
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=cp1252" language="java" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<html>
-<head>
-    <title>Cadastrar um livro</title>
-    <jsp:include page="template/head.jsp" />
-</head>
-<body>
-    <jsp:include page="template/nav.jsp" />
-
+<customTags:pageTemplate title="Cadastro de Livro">
     <section class="container">
-        <h3 style="padding-top: 70px;">Cadastro de Livro</h3>
-        ${mensagem}
 
+        <h3 style="padding-top: 70px;">Cadastro de Livro</h3>
+            ${mensagem}
         <form:form action="${spring:mvcUrl('saveBook').build()}" commandName="bookDTO" cssClass="row col-md-4" method="post">
 
             <div class="form-group">
@@ -51,9 +42,8 @@
             </div>
 
             <div class="form-group">
-                <input class="btn btn-default" type="submit" value="Cadastrar livro">
+                <input class="btn btn-default" type="submit" value="Atualizar livro">
             </div>
         </form:form>
     </section>
-</body>
-</html>
+</customTags:pageTemplate>

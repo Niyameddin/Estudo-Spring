@@ -3,5 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/src/main/java/entity/Book.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/webapp/static/js/jquery.min.js" charset="UTF-8" />
   </component>
 </project>

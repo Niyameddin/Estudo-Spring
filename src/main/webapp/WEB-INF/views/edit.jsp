@@ -1,4 +1,8 @@
 <%--suppress XmlDuplicatedId --%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="customTags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Guilherme
@@ -6,18 +10,7 @@
   Time: 12:06
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=cp1252" language="java" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<html>
-<head>
-    <title>Edição de Livro</title>
-    <jsp:include page="template/head.jsp" />
-</head>
-<body>
-    <jsp:include page="template/nav.jsp" />
-
+<customTags:pageTemplate title="Edição de Livro">
     <section class="container">
 
         <h3 style="padding-top: 70px;">Edição de Livro</h3>
@@ -52,5 +45,4 @@
             </div>
         </form:form>
     </section>
-</body>
-</html>
+</customTags:pageTemplate>

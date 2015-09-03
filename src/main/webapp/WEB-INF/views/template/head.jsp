@@ -8,15 +8,17 @@
 <%@ page contentType="text/html;charset=cp1252" language="java" %>
 <html>
 <body>
-  <meta http-equiv="Content-Type" content="text/html; charset=cp1252">
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<meta http-equiv="Content-Type" content="text/html; charset=cp1252">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
 
-  <%-- Scripts --%>
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="/static/js/bootstrap.min.js"></script>
-  <script src="/static/js/scripts.js"></script>
-  <%-------------%>
+<%-- Scripts --%>
+<!-- Latest compiled and minified JavaScript -->
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/scripts.js"></script>
+<%-------------%>
 </body>
 </html>
