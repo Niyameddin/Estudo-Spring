@@ -53,6 +53,8 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename("messages");
+        messageSource.setCacheSeconds(5);
+        messageSource.setDefaultEncoding("cp1252");
         return messageSource;
     }
 
