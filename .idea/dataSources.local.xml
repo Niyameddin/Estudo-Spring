@@ -7,5 +7,11 @@
       <schema-pattern>estudo-spring.*</schema-pattern>
       <default-schemas>estudo-spring.*</default-schemas>
     </data-source>
+    <data-source name="estudo-spring-testes" uuid="a5429f1d-5e74-4d68-9b5a-e8e7bda74e46">
+      <secret-storage>master_key</secret-storage>
+      <user-name>guilherme</user-name>
+      <schema-pattern>estudo-spring-testes.*</schema-pattern>
+      <default-schemas>estudo-spring-testes.*</default-schemas>
+    </data-source>
   </component>
 </project>
