@@ -4,6 +4,7 @@ Projeto CRUD usando IntelliJ IDEA para estudos no Spring MVC.
 ### Como executar o projeto?
 
 *(lembre-se, você deve estar dentro da pasta do projeto)*
+*(lembre-se, você deve ter o npm e o grunt instalados em seu repositório local)*
 ```shell
 $ cd /caminho-até-o-projeto/Estudo-Spring
 ```
