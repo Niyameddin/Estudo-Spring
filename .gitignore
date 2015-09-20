@@ -63,3 +63,5 @@ target/
 /.project
 /src/main/webapp/app/bower_components
 /src/main/webapp/app/node_modules
+/.fuse_hidden0000aea900000003
+/.fuse_hidden0000aea700000004
