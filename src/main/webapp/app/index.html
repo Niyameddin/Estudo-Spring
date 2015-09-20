@@ -1,0 +1,115 @@
+<!doctype html>
+<html class="no-js" ng-app="bookcaseApp">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>bookcase</title>        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
+
+        <!-- STYLES -->
+        <link rel="stylesheet" href="bower_components/bootswatch-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+        <!-- CUSTOM -->
+        <link rel="stylesheet" href="assets/dist/styles/styles.min.css">
+    </head>    
+<body>
+	<section class="container">
+
+        <nav class="navbar navbar-default navbar-fixed-top" ng-controller="navigationController">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">{{appName}}</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <!-- <li>
+                        <a href="/bookcase/books">Livros</a>
+                    </li>
+                    <li>
+                        <a href="/bookcase/register">Cadastre um livro</a>
+                    </li> -->
+                    <li>
+                        <a href={{baseUrl+"/bookcase/api/books"}} target="_blank">API Livros</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+		<div ng-controller="bookcaseController">
+			<div class="container">
+		        <h3 style="padding-top: 70px;">Listagem de livros</h3>
+                <table class="table table-hover table-bordered table-striped">
+                    <tr>
+                        <td class="text-center">ISBN</td>
+                        <td class="text-center">Título</td>
+                        <td class="text-center">Autor</td>
+                        <td class="text-center">Edição</td>
+                    </tr>
+                    <tr ng-repeat="book in books">
+                        <td>{{book.isbn}}</td>
+                        <td>{{book.title}}</td>
+                        <td>{{book.author}}</td>
+                        <td>{{book.edition}}</td>
+                    </tr>
+                </table>		        
+    		</div>
+		</div>
+
+        <footer class="pull-right">
+            © 2015 Guilherme Alves. Todos os direitos reservados.
+        </footer>
+	</section>    
+
+	<!-- SCRIPTS -->
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+	<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
+	<!-- CUSTOM -->
+	<!-- <script src="assets/dist/scripts/scripts.min.css"></script> -->
+
+	<script type="application/javascript">
+        var bookcase = angular.module("bookcaseApp",[]);
+
+        bookcase.constant("config",{
+            baseUrl:"http://localhost:9090"
+        });
+
+        bookcase.controller("navigationController", function($scope, config){
+            $scope.appName = "Estudo-Spring";
+            $scope.baseUrl = config.baseUrl;
+        });
+
+        bookcase.controller("bookcaseController", function($scope,bookcaseService){            
+            $scope.message;
+            $scope.books = [];
+            var loadBooks = function(){
+                bookcaseService.getBooks.success(function (data){
+                    $scope.books = data;
+                }).error(function (data, status) {
+                    $scope.message = "Aconteceu um problema: " + data;
+                });
+            };
+            loadBooks();
+        });
+
+        bookcase.service("bookcaseService", function($http, config){
+            var _getBooks = function () {
+                return $http.get(config.baseUrl + "/bookcase/api/books");
+            };
+            return{
+                getBooks: _getBooks()
+            };
+        });
+    </script>
+</body>
+</html>

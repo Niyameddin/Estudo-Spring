@@ -61,3 +61,5 @@ $RECYCLE.BIN/
 target/
 .idea/workspace.xml
 /.project
+/src/main/webapp/app/bower_components
+/src/main/webapp/app/node_modules

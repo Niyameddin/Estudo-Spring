@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="estudo-spring" uuid="ca4e5191-ea51-4ffc-b006-8138dcc46610">
-      <secret-storage>master_key</secret-storage>
-      <user-name>guilherme</user-name>
-      <schema-pattern>estudo-spring.*</schema-pattern>
-      <default-schemas>estudo-spring.*</default-schemas>
-    </data-source>
-    <data-source name="estudo-spring-testes" uuid="a5429f1d-5e74-4d68-9b5a-e8e7bda74e46">
-      <secret-storage>master_key</secret-storage>
-      <user-name>guilherme</user-name>
-      <schema-pattern>estudo-spring-testes.*</schema-pattern>
-      <default-schemas>estudo-spring-testes.*</default-schemas>
-    </data-source>
+    <data-source name="estudo-spring" uuid="ca4e5191-ea51-4ffc-b006-8138dcc46610" />
+    <data-source name="estudo-spring-testes" uuid="a5429f1d-5e74-4d68-9b5a-e8e7bda74e46" />
   </component>
 </project>

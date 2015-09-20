@@ -1,0 +1,30 @@
+{
+  "name": "estudo-spring",
+  "version": "1.2.0",
+  "authors": [
+    "Guilherme Alves <gsag.dh@gmail.com>"
+  ],
+  "description": "A bookcase manager app",
+  "main": "index.html",
+  "keywords": [
+    "bookcase",
+    "app"
+  ],
+  "license": "MIT",
+  "homepage": "http://github.com/gsag/estudo-spring",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-resource": "~1.4.4",
+    "angular-ui-router": "~0.2.15",
+    "bootswatch-dist": "paper",
+    "font-awesome": "~4.4.0",
+    "ngInfiniteScroll": "~1.2.1"
+  }
+}
