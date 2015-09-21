@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>bookcase</title>        
+        <title>Estudo-Spring</title>        
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
@@ -48,17 +48,20 @@
 			<div class="container" ng-controller="bookcaseController">
 		        <h3 style="padding-top: 70px;">Listagem de livros</h3>                
                 
-                <table class="table table-hover table-bordered table-striped">
-                    <div class="alert alert-warning" role="alert" ng-if="!hasBooks">
+                <table class="table table-hover table-bordered table-striped" ng-if="hasBooks && errorMessage == ''">
+                    <div class="alert alert-warning" role="alert" ng-if="!hasBooks && !errorMessage">
                         <span>Não há nenhum livro a ser visualizado.</span>
-                    </div>                    
-                    <tr ng-if="hasBooks">
+                    </div>
+                    <div class="alert alert-danger" role="error" ng-if="!errorMessage == ''">
+                        <span ng-bind="errorMessage"></span>
+                    </div>                     
+                    <tr>
                         <td class="text-center">ISBN</td>
                         <td class="text-center">Título</td>
                         <td class="text-center">Autor</td>
                         <td class="text-center">Edição</td>
                     </tr>
-                    <tr ng-repeat="book in books" ng-if="hasBooks">
+                    <tr ng-repeat="book in books.data">
                         <td>{{book.isbn}}</td>
                         <td>{{book.title}}</td>
                         <td>{{book.author}}</td>
@@ -85,38 +88,42 @@
 	<script type="application/javascript">
         var bookcase = angular.module("bookcaseApp",[]);
 
-        bookcase.constant("config",{
+        bookcase.constant("$config",{
             baseUrl:"http://localhost:9090"
         });
 
-        bookcase.controller("navigationController", function($scope, config){
+        bookcase.controller("navigationController", function($scope, $config){
             $scope.appName = "Estudo-Spring";
-            $scope.baseUrl = config.baseUrl;
+            $scope.baseUrl = $config.baseUrl;
         });
 
         bookcase.controller("bookcaseController", function($scope,bookcaseService){            
-            $scope.message;
-            $scope.books = [];
-            $scope.hasBooks = true;                        
+            $scope.errorMessage = "";
+            $scope.books = {data:[]};
+            $scope.hasBooks = true;
+      
             var loadBooks = function(){
                 bookcaseService.getBooks.success(function (data){
-                    $scope.books = data;
+                    $scope.books = {
+                        data: data
+                    };                    
                 }).error(function (data, status) {
-                    $scope.message = "Aconteceu um problema: " + data;
-                });
-            };
-            loadBooks();
-            var hasBooksLoaded = function(){
-                if($scope.books.length == 0){
+                    $scope.errorMessage = "Aconteceu um problema ao resgatar os dados do servidor. " +
+                     "Tente novamente mais tarde. ";
+                }).finally(function(){
+                    hasBooksLoaded();
+                });                
+            }();
+            var hasBooksLoaded = function(){                                
+                if(Object.keys($scope.books.data).length == 0){
                     $scope.hasBooks = false;
                 }
             };
-            hasBooksLoaded();
         });
 
-        bookcase.service("bookcaseService", function($http, config){
+        bookcase.service("bookcaseService", function($http, $config){
             var _getBooks = function () {
-                return $http.get(config.baseUrl + "/bookcase/api/books");
+                return $http.get($config.baseUrl + "/bookcase/api/books");
             };
             return{
                 getBooks: _getBooks()

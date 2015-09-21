@@ -40,7 +40,7 @@ public class BookController {
         return "register";
     }
 
-    @CacheEvict(value = "books", allEntries = true)
+    @CacheEvict(value = {"books", "apibook", "apibooks"}, allEntries = true)
     @RequestMapping(value = "/save", method = RequestMethod.POST, name = "saveBook")
     public String save(@Valid BookDTO bookDTO, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
@@ -61,6 +61,7 @@ public class BookController {
         }
     }
 
+    @CacheEvict(value = {"books", "apibook", "apibooks"}, allEntries = true)
     @RequestMapping(value = "/edit/{isbn}", method = RequestMethod.GET)
     public String edit(@PathVariable String isbn, Model model, BookDTO bookDTO,
                        RedirectAttributes redirectAttributes) {
@@ -81,7 +82,7 @@ public class BookController {
         return "edit";
     }
 
-    @CacheEvict(value = "books", allEntries = true)
+    @CacheEvict(value = {"books", "apibook", "apibooks"}, allEntries = true)
     @RequestMapping(value = "/update", method = RequestMethod.POST, name = "updateBook")
     public String update(@Valid BookDTO bookDTO, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
@@ -102,7 +103,7 @@ public class BookController {
         }
     }
 
-    @CacheEvict(value = "books", allEntries = true)
+    @CacheEvict(value = {"books", "apibook", "apibooks"}, allEntries = true)
     @RequestMapping(value = "/delete/{isbn}", method = RequestMethod.POST)
     public String delete(@PathVariable String isbn, RedirectAttributes redirectAttributes) {
         try {
