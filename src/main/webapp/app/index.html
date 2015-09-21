@@ -17,7 +17,8 @@
 <body>
 	<section class="container">
 
-        <nav class="navbar navbar-default navbar-fixed-top" ng-controller="navigationController">
+        <nav id="navbar" class="navbar navbar-default navbar-fixed-top"
+         ng-controller="navigationController">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -27,7 +28,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">{{appName}}</a>
+                    <a class="navbar-brand" href="/" ng-bind="appName"></a>
                 </div>
                 <ul class="nav navbar-nav">
                     <!-- <li>
@@ -43,25 +44,29 @@
             </div>
         </nav>
 
-		<div ng-controller="bookcaseController">
-			<div class="container">
-		        <h3 style="padding-top: 70px;">Listagem de livros</h3>
+		<section id="content" ng-cloak>
+			<div class="container" ng-controller="bookcaseController">
+		        <h3 style="padding-top: 70px;">Listagem de livros</h3>                
+                
                 <table class="table table-hover table-bordered table-striped">
-                    <tr>
+                    <div class="alert alert-warning" role="alert" ng-if="!hasBooks">
+                        <span>Não há nenhum livro a ser visualizado.</span>
+                    </div>                    
+                    <tr ng-if="hasBooks">
                         <td class="text-center">ISBN</td>
                         <td class="text-center">Título</td>
                         <td class="text-center">Autor</td>
                         <td class="text-center">Edição</td>
                     </tr>
-                    <tr ng-repeat="book in books">
+                    <tr ng-repeat="book in books" ng-if="hasBooks">
                         <td>{{book.isbn}}</td>
                         <td>{{book.title}}</td>
                         <td>{{book.author}}</td>
                         <td>{{book.edition}}</td>
-                    </tr>
+                    </tr>                    
                 </table>		        
     		</div>
-		</div>
+		</section>
 
         <footer class="pull-right">
             © 2015 Guilherme Alves. Todos os direitos reservados.
@@ -92,6 +97,7 @@
         bookcase.controller("bookcaseController", function($scope,bookcaseService){            
             $scope.message;
             $scope.books = [];
+            $scope.hasBooks = true;                        
             var loadBooks = function(){
                 bookcaseService.getBooks.success(function (data){
                     $scope.books = data;
@@ -100,6 +106,12 @@
                 });
             };
             loadBooks();
+            var hasBooksLoaded = function(){
+                if($scope.books.length == 0){
+                    $scope.hasBooks = false;
+                }
+            };
+            hasBooksLoaded();
         });
 
         bookcase.service("bookcaseService", function($http, config){
