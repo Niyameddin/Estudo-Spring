@@ -1,5 +1,19 @@
 // Gruntfile.js
 
+var fs = require('fs');
+var xml2js = require('xml2js');
+var parseDataFromPomXml = function() {
+	var data = [];
+	var parser = new xml2js.Parser();
+	var pomXml = fs.readFileSync('../../../../pom.xml', "utf8");
+	parser.parseString(pomXml, function (err, result){
+        data.version = result.project.version[0];
+        data.name = result.project.artifactId[0];
+        data.group = result.project.groupId[0];        
+    });
+    return data;
+};
+
 module.exports = function(grunt) {
 
   // ===========================================================================
@@ -117,6 +131,30 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
 
   // ============= // CREATE TASKS ========== //
-
+  
   grunt.registerTask('default', ['jshint', 'uglify', 'cssmin', 'copy', 'express', 'open',  'watch']); 
+
+  grunt.registerTask('updateProjectVersion', function (){
+  	console.log("--Atualizando versão do projeto, utilizando: pom.xml");
+  	var pkg = "package.json";
+  	var bower = "bower.json";
+  	if (!grunt.file.exists(pkg)) {
+        grunt.log.error("Erro: Arquivo " + pkg + " não encontrado!"); 
+    }else if(!grunt.file.exists(bower)){
+    	grunt.log.error("Erro: Arquivo " + bower + " não encontrado!"); 
+    }else{
+    	var projectFile = grunt.file.readJSON(pkg);
+    	var bowerFile = grunt.file.readJSON(bower);
+    	var data = parseDataFromPomXml(); 
+    	projectFile.version = data.version;
+    	projectFile.name = data.name;
+    	projectFile.title = data.name;
+    	bowerFile.version = data.version;
+    	bowerFile.name = data.name;
+    	bowerFile.title = data.name;   	
+    	grunt.file.write(pkg, JSON.stringify(projectFile, null, 2));
+    	grunt.file.write(bower, JSON.stringify(bowerFile, null, 2));
+    	console.log("--Versão atualizada: "+ data.version);
+    }
+  });
 };

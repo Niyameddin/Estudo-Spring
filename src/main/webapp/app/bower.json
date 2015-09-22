@@ -1,9 +1,10 @@
 {
   "name": "estudo-spring",
-  "version": "0.0.0",
+  "version": "1.2.0",
   "authors": [
     "Guilherme Alves <gsag.dh@gmail.com>"
   ],
+  "title": "estudo-spring",
   "description": "A bookcase manager app",
   "main": "index.html",
   "keywords": [
@@ -21,10 +22,8 @@
   ],
   "dependencies": {
     "angular": "~1.4.5",
-    "angular-resource": "~1.4.4",
     "angular-ui-router": "~0.2.15",
     "bootswatch-dist": "paper",
-    "font-awesome": "~4.4.0",
-    "ngInfiniteScroll": "~1.2.1"
+    "font-awesome": "~4.4.0"
   }
 }

@@ -9,4 +9,5 @@ bower install
 bower update
 echo ""
 echo "# Executando tarefas automatizadas..."
+grunt updateProjectVersion
 grunt

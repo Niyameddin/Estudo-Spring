@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Estudo-Spring</title>        
+        <title>Estudo-Spring</title>     
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
@@ -89,11 +89,12 @@
         var bookcase = angular.module("bookcaseApp",[]);
 
         bookcase.constant("$config",{
-            baseUrl:"http://localhost:9090"
+            baseUrl:"http://localhost:9090",
+            projectName:"Estudo-Spring"
         });
 
         bookcase.controller("navigationController", function($scope, $config){
-            $scope.appName = "Estudo-Spring";
+            $scope.appName = $config.projectName;
             $scope.baseUrl = $config.baseUrl;
         });
 
