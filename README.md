@@ -1,8 +1,8 @@
 # Estudo-Spring
-Projeto CRUD usando IntelliJ IDEA para estudos no Spring MVC. 
+Projeto CRUD usando IntelliJ IDEA para estudos com Spring MVC e Angular JS.
 
 ### Como executar o projeto?
-> Lembre-se, você deve ter o npm e o grunt instalados em seu repositório local.
+> Você deve ter o node, o npm e o grunt instalados em seu repositório local.
 
 *(lembre-se, você deve estar dentro da pasta do projeto)*
 ```shell
