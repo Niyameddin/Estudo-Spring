@@ -23,6 +23,11 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
+    banner: '/*!\n' +
+            ' * <%= pkg.name%> v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
+            ' * <%= grunt.template.today("dd/mm/yyyy") %> <%= pkg.author %>\n' +
+            ' * Licensed under the <%= pkg.license %> license\n' +
+            ' */\n',
 
     	// configure jshint to validate js files -----------------------------------
 	    jshint: {
@@ -36,11 +41,7 @@ module.exports = function(grunt) {
 	    // configure uglify to minify js files -------------------------------------
 	    uglify: {
 	      options: {
-	      	banner: '/*!\n' +
-            ' * <%= pkg.name%> v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
-            ' * <%= grunt.template.today("dd/mm/yyyy") %> <%= pkg.author %>\n' +
-            ' * Licensed under the <%= pkg.license %> license\n' +
-            ' */\n',
+	      	banner: '<%= banner %>',
 	        mangle:false
 	      },
 	      build: {
@@ -53,11 +54,7 @@ module.exports = function(grunt) {
 	    // configure cssmin to minify css files ------------------------------------
 	    cssmin: {
 	      options: {
-	        banner: '/*!\n' +
-            ' * <%= pkg.name%> v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
-            ' * <%= grunt.template.today("dd/mm/yyyy") %> <%= pkg.author %>\n' +
-            ' * Licensed under the <%= pkg.license %> license\n' +
-            ' */\n'
+	        banner: '<%= banner %>',
 	      },
 	      build: {
 	        files: {
