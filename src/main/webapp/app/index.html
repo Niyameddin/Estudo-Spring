@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Estudo-Spring</title>     
+        <title>Estudo-Spring</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
 
         <!-- STYLES -->
@@ -13,123 +13,58 @@
         <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
         <!-- CUSTOM -->
         <link rel="stylesheet" href="assets/dist/styles/styles.min.css">
-    </head>    
+    </head>
 <body>
-	<section class="container">
-
-        <nav id="navbar" class="navbar navbar-default navbar-fixed-top"
-         ng-controller="navigationController">
+    <section class="container">
+        <nav id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container-fluid">
-                <div class="navbar-header">
+                <div class="navbar-header" ng-controller="navigationController">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
+                            data-target="#navigationMenu" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/" ng-bind="appName"></a>
+                    <span ng-cloak>
+                        <a class="navbar-brand" ui-sref="bookcase">
+                            {{appName}} <i class="fa fa-leaf"></i>                          
+                        </a>  
+                    </span>                    
                 </div>
-                <ul class="nav navbar-nav">
-                    <!-- <li>
-                        <a href="/bookcase/books">Livros</a>
-                    </li>
-                    <li>
-                        <a href="/bookcase/register">Cadastre um livro</a>
-                    </li> -->
-                    <li>
-                        <a href={{baseUrl+"/bookcase/api/books"}} target="_blank">API Livros</a>
-                    </li>
-                </ul>
+                <div class="collapse navbar-collapse" id="navigationMenu">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a ui-sref="books">Livros</a>
+                        </li>
+                        <li>
+                            <a ui-sref="register">Cadastre um livro</a>
+                        </li>
+                        <li>
+                            <a class="link" ng-href target="_blank">
+                                API Livros
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
 
-		<section id="content" ng-cloak>
-			<div class="container" ng-controller="bookcaseController">
-		        <h3 style="padding-top: 70px;">Listagem de livros</h3>                
-                
-                <table class="table table-hover table-bordered table-striped" ng-if="hasBooks && errorMessage == ''">
-                    <div class="alert alert-warning" role="alert" ng-if="!hasBooks && !errorMessage">
-                        <span>Não há nenhum livro a ser visualizado.</span>
-                    </div>
-                    <div class="alert alert-danger" role="error" ng-if="!errorMessage == ''">
-                        <span ng-bind="errorMessage"></span>
-                    </div>                     
-                    <tr>
-                        <td class="text-center">ISBN</td>
-                        <td class="text-center">Título</td>
-                        <td class="text-center">Autor</td>
-                        <td class="text-center">Edição</td>
-                    </tr>
-                    <tr ng-repeat="book in books.data">
-                        <td>{{book.isbn}}</td>
-                        <td>{{book.title}}</td>
-                        <td>{{book.author}}</td>
-                        <td>{{book.edition}}</td>
-                    </tr>                    
-                </table>		        
-    		</div>
-		</section>
+        <section id="content" ng-cloak>
+            <div ui-view></div>
+        </section>
 
         <footer class="pull-right">
             © 2015 Guilherme Alves. Todos os direitos reservados.
         </footer>
-	</section>    
+    </section>
 
-	<!-- SCRIPTS -->
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="bower_components/angular/angular.min.js"></script>
-	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
-	<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-	<script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
-	<!-- CUSTOM -->
-	<!-- <script src="assets/dist/scripts/scripts.min.css"></script> -->
-
-	<script type="application/javascript">
-        var bookcase = angular.module("bookcaseApp",[]);
-
-        bookcase.constant("$config",{
-            baseUrl:"http://localhost:9090",
-            projectName:"Estudo-Spring"
-        });
-
-        bookcase.controller("navigationController", function($scope, $config){
-            $scope.appName = $config.projectName;
-            $scope.baseUrl = $config.baseUrl;
-        });
-
-        bookcase.controller("bookcaseController", function($scope,bookcaseService){            
-            $scope.errorMessage = "";
-            $scope.books = {data:[]};
-            $scope.hasBooks = true;
-      
-            var loadBooks = function(){
-                bookcaseService.getBooks.success(function (data){
-                    $scope.books = {
-                        data: data
-                    };                    
-                }).error(function (data, status) {
-                    $scope.errorMessage = "Aconteceu um problema ao resgatar os dados do servidor. " +
-                     "Tente novamente mais tarde. ";
-                }).finally(function(){
-                    hasBooksLoaded();
-                });                
-            }();
-            var hasBooksLoaded = function(){                                
-                if(Object.keys($scope.books.data).length == 0){
-                    $scope.hasBooks = false;
-                }
-            };
-        });
-
-        bookcase.service("bookcaseService", function($http, $config){
-            var _getBooks = function () {
-                return $http.get($config.baseUrl + "/bookcase/api/books");
-            };
-            return{
-                getBooks: _getBooks()
-            };
-        });
-    </script>
+    <!-- SCRIPTS -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/bootswatch-dist/js/bootstrap.min.js"></script>
+    <!-- CUSTOM -->
+    <script src="assets/dist/scripts/scripts.min.js"></script>
 </body>
 </html>
