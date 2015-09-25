@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import persistence.service.BookRepositoryService;
 
+import javax.validation.UnexpectedTypeException;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +29,22 @@ public class BookRESTController {
 
     @Autowired
     BookRepositoryService bookRepositoryService;
+
+    @CacheEvict(value = {"books", "apibook", "apibooks"}, allEntries = true)
+    @RequestMapping(value = "/books", method=RequestMethod.POST)
+    public Book create(@RequestBody @Valid BookDTO bookDTO) {
+        Book book = null;
+        try {
+            book = bookFactory.createBook(bookDTO);
+            bookRepositoryService.saveEntity(book);
+        } catch (UnexpectedTypeException ute) {
+            System.err.println(ute.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }finally {
+            return book;
+        }
+    }
 
     @Cacheable(value = "apibook")
     @RequestMapping(value = "/books", method = RequestMethod.GET)
