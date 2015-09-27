@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module("bookcaseApp", ['ui.router']);
+    angular.module("bookcaseApp", ['ui.router','ngResource']);
 
     angular.module("bookcaseApp")
         .constant("$config",{
@@ -28,7 +28,8 @@
             // Register a Book Page
             .state('register', {
                url: '/bookcase/register',
-               template: '<div class="title">Em Breve</div>'
+               templateUrl: 'assets/views/partial-register-book.html',
+               controller: 'registerBookController'
             });
             $urlRouterProvider.otherwise('/bookcase');
         });

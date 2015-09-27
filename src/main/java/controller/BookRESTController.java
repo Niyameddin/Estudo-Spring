@@ -8,8 +8,10 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import persistence.service.BookRepositoryService;
+import util.ResponseConverter;
 
 import javax.validation.UnexpectedTypeException;
 import javax.validation.Valid;
@@ -30,19 +32,26 @@ public class BookRESTController {
     @Autowired
     BookRepositoryService bookRepositoryService;
 
+    @Autowired
+    ResponseConverter responseConverter;
+
     @CacheEvict(value = {"books", "apibook", "apibooks"}, allEntries = true)
-    @RequestMapping(value = "/books", method=RequestMethod.POST)
-    public Book create(@RequestBody @Valid BookDTO bookDTO) {
+    @RequestMapping(value = "/books", method = RequestMethod.POST)
+    public ResponseEntity<String> create(@RequestBody @Valid BookDTO bookDTO, BindingResult result) {
         Book book = null;
-        try {
+        if (result.hasErrors()) {
+            System.out.println(result.getAllErrors().toString());
+            String errors = responseConverter.convertResponseMessage(result.getAllErrors());
+            return new ResponseEntity<String>(errors,HttpStatus.ACCEPTED);
+        } else try {
             book = bookFactory.createBook(bookDTO);
-            bookRepositoryService.saveEntity(book);
+//            bookRepositoryService.saveEntity(book);
         } catch (UnexpectedTypeException ute) {
             System.err.println(ute.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }finally {
-            return book;
+        } finally {
+            return new ResponseEntity<String>("{\"message\":\"ok\"}",HttpStatus.OK);
         }
     }
 
