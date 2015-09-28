@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module("bookcaseApp", ['ui.router','ngResource']);
+    angular.module("bookcaseApp", ['ui.router','ngResource','ngStorage']);
 
     angular.module("bookcaseApp")
         .constant("$config",{
@@ -32,5 +32,9 @@
                controller: 'registerBookController'
             });
             $urlRouterProvider.otherwise('/bookcase');
-        });
+        })
+        //Run when app starts
+        .run(function($state){
+              $state.go('bookcase');
+            });
 }());    
