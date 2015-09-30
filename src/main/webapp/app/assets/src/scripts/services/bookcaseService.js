@@ -11,7 +11,6 @@
 				book.$save({}, function(response) {
 					var resp = response[Object.keys(response)[0]];
 					$localStorage.bookList.data.push(resp.objectAttributes);
-					_sortArrayById($localStorage.bookList.data);
 					$localStorage.responseData = resp;
 				}, function(failedResponse){
 					if(failedResponse.data){
@@ -22,11 +21,6 @@
 				responseData = $localStorage.responseData;
 				delete $localStorage.responseData;
 				return responseData;
-			};
-			var _sortArrayById = function(array){
-				if(array){
-					array.sort(function(e1,e2){return e1.isbn-e2.isbn;});
-				}
 			};
 			return{
 				getBooks: _getBooks(),
