@@ -35,6 +35,6 @@
         })
         //Run when app starts
         .run(function($state){
-              $state.go('bookcase');
-            });
-}());    
+            $state.go('bookcase');
+        });
+}());

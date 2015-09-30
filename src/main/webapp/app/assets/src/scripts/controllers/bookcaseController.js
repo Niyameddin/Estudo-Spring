@@ -4,7 +4,7 @@
         .controller("bookcaseController", function($scope,bookcaseService,$localStorage){
             $scope.errorMessage = "";
             $scope.books = {data:[]};
-            $scope.hasBooks = true;            
+            $scope.hasBooks = true;
 
             var loadBooks = function(){
                 bookcaseService.getBooks.success(function (data){

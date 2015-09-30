@@ -8,11 +8,22 @@
 							  author:"guilherme",
 							  edition:"1"};
 
-			$scope.response = {};			
+			$scope.response = {};
 
-			var save_book = function(){
-				$scope.response = bookcaseService.createBook($scope.newBook);
-				$state.transitionTo("books");
+			var registerNewBook = function(){
+				$scope.response = bookcaseService.createBook($scope.newBook);				
+				if($scope.response){
+					if($scope.response.status == "SUCCESS"){
+						$state.transitionTo("books");
+					}
+				}else{
+					$scope.response = {
+						status:"NULL",
+						objectType:"null",
+						objectAttributes:"null",
+						defaultMessage:"Houve um problema ao receber a resposta do servidor"
+					};
+				}	
 			}();
 		});
-}());   
+}());

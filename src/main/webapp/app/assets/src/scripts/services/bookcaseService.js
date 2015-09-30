@@ -11,20 +11,22 @@
 				book.$save({}, function(response) {
 					var resp = response[Object.keys(response)[0]];
 					$localStorage.bookList.data.push(resp.objectAttributes);
-					_sortArrayById();
-					$localStorage.responseData = resp;				
+					_sortArrayById($localStorage.bookList.data);
+					$localStorage.responseData = resp;
 				}, function(failedResponse){
 					if(failedResponse.data){
 						var resp = failedResponse.data[Object.keys(failedResponse.data)[0]];
-						$localStorage.responseData = resp;				  		
-					}				  	
-				});				
+						$localStorage.responseData = resp;
+					}
+				});
 				responseData = $localStorage.responseData;
-				delete $localStorage.responseData;				
+				delete $localStorage.responseData;
 				return responseData;
 			};
-			var _sortArrayById = function(){
-				$localStorage.bookList.data.sort(function(e1,e2){return e1.isbn-e2.isbn;});
+			var _sortArrayById = function(array){
+				if(array){
+					array.sort(function(e1,e2){return e1.isbn-e2.isbn;});
+				}
 			};
 			return{
 				getBooks: _getBooks(),
