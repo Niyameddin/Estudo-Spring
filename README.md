@@ -1,4 +1,6 @@
 # Estudo-Spring
+[![Dependency Status](https://david-dm.org/gsag/Estudo-Spring.svg)](https://david-dm.org/gsag/Estudo-Spring)
+[![devDependency Status](https://david-dm.org/gsag/Estudo-Spring/dev-status.svg)](https://david-dm.org/gsag/Estudo-Spring#info=devDependencies)<br/><br/>
 Projeto CRUD usando IntelliJ IDEA para estudos com Spring MVC e Angular JS.</br>
 Integrando módulo front-end em Angular JS com back-end Spring MVC RESTful, utilizando JSON como canal de comunicação.
 
