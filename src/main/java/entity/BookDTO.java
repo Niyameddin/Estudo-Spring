@@ -80,11 +80,9 @@ public class BookDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "BookDTO{" +
-                "author='" + author + '\'' +
-                ", isbn='" + isbn + '\'' +
-                ", title='" + title + '\'' +
-                ", edition='" + edition + '\'' +
-                '}';
+        return "{\"author\":" + "\""+ author +"\"" +
+                ", \"isbn\":" + "\""+ isbn +"\"" +
+                ", \"title\":" + "\""+ title + "\""+
+                ", \"edition\":" +"\""+ edition + "\"}";
     }
 }

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import persistence.service.BookRepositoryService;
 import util.ResponseConverter;
 
-import javax.validation.UnexpectedTypeException;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -39,20 +38,29 @@ public class BookRESTController {
     @RequestMapping(value = "/books", method = RequestMethod.POST)
     public ResponseEntity<String> create(@RequestBody @Valid BookDTO bookDTO, BindingResult result) {
         Book book = null;
+        ResponseEntity<String> responseEntity = null;
         if (result.hasErrors()) {
-            System.out.println(result.getAllErrors().toString());
-            String errors = responseConverter.convertResponseMessage(result.getAllErrors());
-            return new ResponseEntity<String>(errors,HttpStatus.ACCEPTED);
-        } else try {
-            book = bookFactory.createBook(bookDTO);
-//            bookRepositoryService.saveEntity(book);
-        } catch (UnexpectedTypeException ute) {
-            System.err.println(ute.getMessage());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            return new ResponseEntity<String>("{\"message\":\"ok\"}",HttpStatus.OK);
+            String errors = responseConverter.convertErrorListToJson(result.getAllErrors(),ResponseConverter.ERROR);
+            responseEntity = new ResponseEntity<String>(errors,HttpStatus.BAD_REQUEST);
+        } else {
+            try {
+                if (bookRepositoryService.hasEntity(new Long(bookDTO.getIsbn()))) {
+                    String message = responseConverter.convertMessageToJson(bookDTO, "Este ISBN já foi cadastrado",
+                            ResponseConverter.WARNING);
+                    responseEntity = new ResponseEntity<String>(message, HttpStatus.BAD_REQUEST);
+                } else {
+                    book = bookFactory.createBook(bookDTO);
+                    bookRepositoryService.saveEntity(book);
+
+                    String message = responseConverter.convertMessageToJson(book, "Livro cadastrado com sucesso",
+                            ResponseConverter.SUCCESS);
+                    responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
+        return responseEntity;
     }
 
     @Cacheable(value = "apibook")
