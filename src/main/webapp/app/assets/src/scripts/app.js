@@ -22,7 +22,7 @@
             // Books Page
             .state('books', {
                url: '/bookcase/books',
-               templateUrl: 'assets/views/partial-bookcase.html',
+               templateUrl: 'assets/views/partial-books.html',
                controller: 'bookcaseController'
             })
             // Register a Book Page

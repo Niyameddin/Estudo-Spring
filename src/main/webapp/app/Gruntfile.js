@@ -63,6 +63,17 @@ module.exports = function(grunt) {
 	      }
 	    },
 
+      less: {
+          development: {
+              options: {
+                  paths: ["assets/src/styles"]
+              },
+              files: {
+                  "assets/src/styles/custom.css": "assets/src/styles/custom.less" // destination file and source file
+              }
+          }
+      },
+
 	    // configure to copy files ------------------------------------------
 	    copy: {
 		  main: {
@@ -73,10 +84,15 @@ module.exports = function(grunt) {
 		},
 
 		// configure watch to auto update ------------------------------------------
-	    watch: {  
-          options: {
-              livereload: true
-          },
+    watch: {  
+      options: {
+          livereload: true
+      },
+
+      less: {
+        files: ['assets/src/styles/**/*.less'], 
+        tasks: ['less'] 
+      },
 
 		  stylesheets: { 
 			files: ['assets/src/styles/**/*.css'], 
@@ -121,6 +137,7 @@ module.exports = function(grunt) {
   
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -129,7 +146,7 @@ module.exports = function(grunt) {
 
   // ============= // CREATE TASKS ========== //
   
-  grunt.registerTask('default', ['jshint', 'uglify', 'cssmin', 'copy', 'express', 'open',  'watch']); 
+  grunt.registerTask('default', ['jshint', 'uglify', 'less', 'cssmin', 'copy', 'express', 'open',  'watch']); 
 
   grunt.registerTask('updateProjectVersion', function (){
   	console.log("--Atualizando versão do projeto, utilizando: pom.xml");

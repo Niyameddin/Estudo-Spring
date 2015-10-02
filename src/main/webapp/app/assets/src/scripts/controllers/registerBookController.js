@@ -21,7 +21,8 @@
 						status:"NULL",
 						objectType:"null",
 						objectAttributes:"null",
-						defaultMessage:"Houve um problema ao receber a resposta do servidor"
+						defaultMessage:"Houve um problema ao receber a resposta do servidor. "+ 
+						"Tente novamente daqui alguns instantes."
 					};
 				}	
 			}();

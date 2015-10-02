@@ -1,0 +1,75 @@
+@import 'colors.less';
+	
+	/* variables */ 
+	@default-font-weight:500;
+	@default-font-size:1.1em;
+	@color-white:white;
+	@color-default:@color-primary-0;
+	@color-default-darken:@color-primary-0-1;
+	@color-danger:#CC5148;
+	@color-warning:#CC9048;
+	@color-info:#5F8AA3;
+	@color-success:#6DC47C;
+	/* end variables */ 
+
+	body{
+		font-weight: @default-font-weight;
+		background: url("../images/bg.png") no-repeat center center fixed; 
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+
+	/* nav */
+	.link{
+		cursor:pointer;
+		cursor:hand;
+	}
+	.brand > a,.brand > i{
+		color:@color-white !important;
+
+		&:hover{
+			text-shadow: 0px 3px 3px @color-default;
+		}
+	}
+	.brand,.brand:hover,.navbar-nav > li:hover{
+		transition: text-shadow 0.1s ease-in-out;
+	}
+	.navbar{
+		li{			
+			&:hover{	
+				text-shadow: 0px 3px 3px @color-default;			
+				background-color:@color-default-darken;
+				border-bottom: 2px solid @color-white;
+			}
+		}
+		li{
+			a{
+				color:@color-white !important;
+			}
+		}
+	}
+	/* end nav */
+
+	/* partials */
+	.title{
+		font-weight: @default-font-weight;
+		padding-top: 70px;
+	}
+	/* end partials */
+
+		/* alert colors */
+	.alert-danger {
+    	background-color: @color-danger;
+	}
+	.alert-warning {
+    	background-color: @color-warning;
+	}
+	.alert-info {
+    	background-color: @color-info;
+	}
+	.alert-success {
+    	background-color: @color-success;
+	}
+	/* end alert colors */

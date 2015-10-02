@@ -1,0 +1,27 @@
+    <div class="container">
+        <h3 class="title"><i class="fa fa-book"></i> Listagem de Livros</h3>
+
+        <table class="table table-hover table-bordered table-striped" 
+            ng-if="hasBooks && errorMessage == ''">
+            <div class="alert alert-warning" role="alert" ng-if="!hasBooks && !errorMessage">
+                <span>Não há nenhum livro a ser visualizado.</span>
+            </div>
+            <div class="alert alert-danger" role="error" ng-if="!errorMessage == ''">
+                <span ng-cloak>
+                    <i class="fa fa-exclamation-circle"></i> {{errorMessage}}
+                </span>
+            </div>
+            <tr>
+                <td class="text-center">ISBN</td>
+                <td class="text-center">Título</td>
+                <td class="text-center">Autor</td>
+                <td class="text-center">Edição</td>
+            </tr>
+            <tr ng-repeat="book in books.data | orderBy: 'isbn'">
+                <td>{{book.isbn}}</td>
+                <td>{{book.title}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.edition}}</td>
+            </tr>
+        </table>
+    </div>
