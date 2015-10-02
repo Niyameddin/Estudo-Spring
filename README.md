@@ -1,8 +1,8 @@
 # Estudo-Spring
 [![Dependency Status](https://david-dm.org/gsag/Estudo-Spring.svg)](https://david-dm.org/gsag/Estudo-Spring)
 [![devDependency Status](https://david-dm.org/gsag/Estudo-Spring/dev-status.svg)](https://david-dm.org/gsag/Estudo-Spring#info=devDependencies)<br/><br/>
-Projeto CRUD usando IntelliJ IDEA para estudos com Spring MVC e Angular JS.</br>
-Integrando módulo front-end em Angular JS com back-end Spring MVC RESTful, utilizando JSON como canal de comunicação.
+Projeto CRUD usando IntelliJ IDEA para estudos com Spring MVC.</br>
+Este projeto utiliza a integração de um módulo front-end em Angular JS com o back-end com Spring MVC RESTful, utilizando JSON como canal de comunicação.
 
 ### Como executar o projeto?
 > Você deve ter o node, o npm e o grunt instalados em seu repositório local.
@@ -26,5 +26,8 @@ $ sh client.sh
 - Configurações gerais do servidor Spring estão no pacote **config**.
 - Constantes, rotas e o módulo do Angular estão no arquivo **app.js**.
 
-> Lembre-se de criar um banco de dados mysql para que o projeto possa rodar. Você deverá configurar suas credênciais de acesso na classe JPAConfiguration do pacote config.
+--
+###Observações:
+- Lembre-se de criar um banco de dados mysql para que o projeto possa rodar. Você deverá configurar suas credênciais de acesso na classe **JPAConfiguration** do pacote **config**.
+- O projeto front-end está localizado na raiz do diretório **webapp** dentro da pasta **app**, seguindo o caminho: /src/main/webapp/
 
