@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module("bookcaseApp", ['ui.router','ngResource','ngStorage']);
+    angular.module("bookcaseApp", ['ui.router','ngResource','ngStorage','ui.mask']);
 
     angular.module("bookcaseApp")
         .constant("$config",{

@@ -10,6 +10,7 @@
 	@color-warning:#CC9048;
 	@color-info:#5F8AA3;
 	@color-success:#6DC47C;
+	@color-disabled:#DDD;
 	/* end variables */ 
 
 	body{
@@ -37,16 +38,18 @@
 		transition: text-shadow 0.1s ease-in-out;
 	}
 	.navbar{
-		li{			
+		li{		
+			border-bottom: 2px solid transparent;
 			&:hover{	
 				text-shadow: 0px 3px 3px @color-default;			
 				background-color:@color-default-darken;
 				border-bottom: 2px solid @color-white;
 			}
 		}
-		li{
+		li{			
 			a{
-				color:@color-white !important;
+				font-size: @default-font-size;
+				color:@color-white !important;				
 			}
 		}
 	}
@@ -57,9 +60,76 @@
 		font-weight: @default-font-weight;
 		padding-top: 70px;
 	}
+	table{
+		background-color: @color-white;
+	}
 	/* end partials */
 
-		/* alert colors */
+	/* forms */
+	.borderline(@color){
+		-webkit-box-shadow: inset 0 -2px 0 @color !important;
+	   	box-shadow: inset 0 -2px 0 @color !important;
+	}
+
+	textarea,
+	textarea.form-control,
+	input.form-control,
+	input[type=text],
+	input[type=password],
+	input[type=email],
+	input[type=number],
+	[type=text].form-control,
+	[type=password].form-control,
+	[type=email].form-control,
+	[type=tel].form-control,
+	[contenteditable].form-control {
+	  &:focus{
+	    .borderline(@color-secondary-1-1);
+	  }  
+	}
+
+	.btn-success.disabled, .btn-success[disabled]{
+    	background-color: @color-disabled;
+    	border-color: transparent;    	
+    	&:hover,&:active{
+    		background-color: @color-disabled;
+    		border-color: transparent;
+    		cursor: not-allowed;
+    		text-shadow: none;
+    		-webkit-box-shadow:none;
+    		box-shadow: none;
+    	}
+	}
+
+	.btn-success {
+	    color: #ffffff;
+	    background-color: @color-success;
+	    border-color: transparent;
+	    &:hover,&:active,&:focus{
+	    	background-color: @color-success;
+	    	text-shadow: 0px 3px 3px @color-default;
+	    	-webkit-box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);	    	
+    		box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    	    -webkit-transition: all .3s ease-out;
+		    -moz-transition: all .3s ease-out;
+		    -o-transition: all .3s ease-out;
+		    -ms-transition: all .3s ease-out;
+		    transition: all .3s ease-out;
+	    }
+	}
+
+	.has-error{
+	    .borderline(@color-danger);
+	}
+
+	#form-group{
+		.ng-valid{
+			.borderline(@color-success);
+		}
+	}
+	/* end forms */
+
+	/* alert colors */
 	.alert-danger {
     	background-color: @color-danger;
 	}

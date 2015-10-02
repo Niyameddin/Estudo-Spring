@@ -11,6 +11,7 @@
 			$scope.response = {};
 
 			var registerNewBook = function(){
+				alert("called");
 				$scope.response = bookcaseService.createBook($scope.newBook);				
 				if($scope.response){
 					if($scope.response.status == "SUCCESS"){
@@ -25,6 +26,6 @@
 						"Tente novamente daqui alguns instantes."
 					};
 				}	
-			}();
+			};
 		});
 }());
