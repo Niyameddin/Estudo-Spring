@@ -1,7 +1,8 @@
     <div class="container">
-        <h3 class="title"><i class="fa fa-book"></i> Cadastre um Livro</h3>              
+        <h3 class="title"><i class="fa fa-book"></i> Cadastre um Livro</h3>
         <div class="row col-md-12">
-            <form method="post" id="registerBook" name="registerBook" novalidate>
+            <form method="post" id="registerBook" name="registerBook"
+                ng-submit="registerNewBook(newBook)" novalidate>
                 <div id="left" class="col-md-4">
                     <div id="form-group" class="form-group-lg" ng-class="{'has-error': registerBook.field_isbn.$invalid && !registerBook.field_isbn.$pristine }">
                         <label for="field_isbn">ISBN</label>
@@ -13,7 +14,7 @@
                                 placeholder="Digite o ISBN do livro"
                                 ui-mask-placeholder
                                 ui-mask="999-99-999-9999-9"
-                                maxlength="13" 
+                                maxlength="13"
                                 required>
                     </div>
                     <br>
@@ -50,20 +51,19 @@
                                 placeholder="Digite a edição deste livro"
                                 ui-mask-placeholder
                                 ui-mask="9?9"
-                                maxlength="2" 
+                                maxlength="2"
                                 required>
                     </div>
                     <br>
                 </div>
                 <div id="alertBox" class="col-md-4">
-                    <pre>{{response}}</pre>  
+                    <pre>{{response}}</pre>
                     <pre>{{newBook}}</pre>
-                </div>             
-                <br>                
+                </div>
+                <br>
 				<div id="form-group" class="form-group-lg col-md-8">
                  	<button type="submit" ng-disabled="!registerBook.$valid"
-                 	 class="form-control btn btn-success"
-                     ng-click="registerNewBook(registerBook.$valid)">
+                 	 class="form-control btn btn-success">
                         <i class="fa fa-floppy-o"></i> Cadastrar Livro
                     </button>
                 </div>

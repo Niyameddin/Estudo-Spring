@@ -2,20 +2,33 @@
 	'use strict';
 
 	angular.module("bookcaseApp")
-		.controller("registerBookController", function($scope,bookcaseService,$state){
-			$scope.newBook = {isbn:"9999999999991",
-							  title:"angular+springmvc",
-							  author:"guilherme",
-							  edition:"1"};
+		.controller("registerBookController", function($scope,bookcaseService,$state){			
+			$scope.newBook = {isbn:"",
+							  title:"",
+							  author:"",
+							  edition:""};
 
 			$scope.response = {};
 
-			var registerNewBook = function(){
-				alert("called");
-				$scope.response = bookcaseService.createBook($scope.newBook);				
+			var resetFields = function(){
+				return {isbn:"",
+						title:"",
+						author:"",
+						edition:""};
+			};
+
+			$scope.registerNewBook = function(book){				
+				$scope.response = bookcaseService.createBook(book);				
 				if($scope.response){
 					if($scope.response.status == "SUCCESS"){
+						$scope.newBook = resetFields();
 						$state.transitionTo("books");
+					}else if($scope.response.status == "WARNING"){
+						alert("warning");
+						$scope.newBook = resetFields();
+					}else{
+						alert("error");
+						$scope.newBook = resetFields();
 					}
 				}else{
 					$scope.response = {
@@ -25,7 +38,7 @@
 						defaultMessage:"Houve um problema ao receber a resposta do servidor. "+ 
 						"Tente novamente daqui alguns instantes."
 					};
-				}	
+				}
 			};
 		});
 }());
