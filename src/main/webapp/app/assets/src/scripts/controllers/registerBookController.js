@@ -17,18 +17,16 @@
 						edition:""};
 			};
 
-			$scope.registerNewBook = function(book){				
-				$scope.response = bookcaseService.createBook(book);				
+			$scope.registerNewBook = function(book){
+				$scope.response = bookcaseService.createBook(book);										
 				if($scope.response){
 					if($scope.response.status == "SUCCESS"){
 						$scope.newBook = resetFields();
 						$state.transitionTo("books");
 					}else if($scope.response.status == "WARNING"){
-						alert("warning");
-						$scope.newBook = resetFields();
+						alert("warning");						
 					}else{
-						alert("error");
-						$scope.newBook = resetFields();
+						alert("error");						
 					}
 				}else{
 					$scope.response = {
@@ -38,7 +36,7 @@
 						defaultMessage:"Houve um problema ao receber a resposta do servidor. "+ 
 						"Tente novamente daqui alguns instantes."
 					};
-				}
+				}				
 			};
 		});
 }());

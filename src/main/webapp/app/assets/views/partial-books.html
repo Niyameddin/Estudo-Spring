@@ -17,7 +17,7 @@
                 <td class="text-center">Autor</td>
                 <td class="text-center">Edição</td>
             </tr>
-            <tr ng-repeat="book in books.data | orderBy: 'isbn'">
+            <tr ng-repeat="book in books | orderBy: 'isbn'">
                 <td>{{book.isbn}}</td>
                 <td>{{book.title}}</td>
                 <td>{{book.author}}</td>
