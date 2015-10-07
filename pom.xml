@@ -9,11 +9,53 @@
     <url>http://maven.apache.org</url>
 
     <properties>
+
+        <!-- Nome do Projeto -->
+        <project-name>${artifactId}</project-name>
+
+        <!-- Encoding do projeto -->
         <project.build.sourceEncoding>cp1252</project.build.sourceEncoding>
+
+        <!-- Spring Framework -->
         <org.springframework-version>4.2.0.RELEASE</org.springframework-version>
+
+        <!-- Logs -->
         <org.slf4j-version>1.6.1</org.slf4j-version>
+
+        <!-- Jackson JSON-->
         <jackson.version>1.9.13</jackson.version>
         <jackson-databind.version>2.6.1</jackson-databind.version>
+
+        <!-- Tomcat -->
+        <tomcat-version>7.0.30</tomcat-version>
+
+        <!-- JAVAX-->
+        <servlet-jsp-version>2.1</servlet-jsp-version>
+        <servlet-jsp-jstl-version>1.2</servlet-jsp-jstl-version>
+        <validation-api-version>1.1.0.Final</validation-api-version>
+
+        <!-- GlassFish -->
+        <glassfish-version>1.2</glassfish-version>
+
+        <!-- JUnit -->
+        <junit-version>4.12</junit-version>
+
+        <!-- Hibernate -->
+        <hibernate-core-version>4.3.11.Final</hibernate-core-version>
+        <hibernate-jpa-version>1.0.0.Final</hibernate-jpa-version>
+        <hibernate-validator-version>5.2.0.Final</hibernate-validator-version>
+
+        <!-- MySQL -->
+        <mysql-connector-version>5.1.36</mysql-connector-version>
+
+        <!-- Guava Cache Manager-->
+        <guava-version>18.0</guava-version>
+
+        <!-- Maven Config -->
+        <maven-war-plugin-version>2.6</maven-war-plugin-version>
+        <maven-compiler-plugin-version>2.3.2</maven-compiler-plugin-version>
+        <maven-compiler-plugin-encoding>cp1252</maven-compiler-plugin-encoding>
+        <maven-tomcat-plugin>2.2</maven-tomcat-plugin>
     </properties>
 
     <dependencies>
@@ -26,19 +68,21 @@
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-servlet-api</artifactId>
-            <version>7.0.30</version>
+            <version>${tomcat-version}</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
-            <version>2.1</version>
+            <version>${servlet-jsp-version}</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>javax.servlet.jsp.jstl</groupId>
             <artifactId>jstl-api</artifactId>
-            <version>1.2</version>
+            <version>${servlet-jsp-jstl-version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>javax.servlet</groupId>
@@ -46,10 +90,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jstl-impl</artifactId>
-            <version>1.2</version>
+            <version>${glassfish-version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>javax.servlet</groupId>
@@ -61,7 +106,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit-version}</version>
         </dependency>
 
         <dependency>
@@ -71,47 +116,23 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Logging -->
-        <!--<dependency>-->
-        <!--<groupId>org.slf4j</groupId>-->
-        <!--<artifactId>slf4j-api</artifactId>-->
-        <!--<version>${org.slf4j-version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.slf4j</groupId>-->
-        <!--<artifactId>jcl-over-slf4j</artifactId>-->
-        <!--<version>${org.slf4j-version}</version>-->
-        <!--<scope>runtime</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.slf4j</groupId>-->
-        <!--<artifactId>slf4j-log4j12</artifactId>-->
-        <!--<version>${org.slf4j-version}</version>-->
-        <!--<scope>runtime</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>log4j</groupId>-->
-        <!--<artifactId>log4j</artifactId>-->
-        <!--<version>1.2.16</version>-->
-        <!--<scope>runtime</scope>-->
-        <!--</dependency>-->
         <!-- configuracao jpa e driver -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.11.Final</version>
+            <version>${hibernate-core-version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.3.11.Final</version>
+            <version>${hibernate-core-version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.0.Final</version>
+            <version>${hibernate-jpa-version}</version>
         </dependency>
 
         <dependency>
@@ -124,19 +145,20 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.36</version>
+            <version>${mysql-connector-version}</version>
         </dependency>
 
         <!-- JSR 303 with Hibernate Validator -->
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
+            <version>${validation-api-version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>5.2.0.Final</version>
+            <version>${hibernate-validator-version}</version>
         </dependency>
 
         <!-- Jackson JSON Mapper -->
@@ -145,6 +167,7 @@
             <artifactId>jackson-mapper-asl</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+
         <!-- Jackson JSON Processor -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -156,7 +179,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>18.0</version>
+            <version>${guava-version}</version>
         </dependency>
 
         <dependency>
@@ -168,12 +191,12 @@
 
 
     <build>
-        <finalName>estudo-spring</finalName>
+        <finalName>${project-name}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.6</version>
+                <version>${maven-war-plugin-version}</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
@@ -181,18 +204,18 @@
 
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>${maven-compiler-plugin-version}</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
-                    <encoding>cp1252</encoding>
+                    <encoding>${maven-compiler-plugin-encoding}</encoding>
                 </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
+                <version>${maven-tomcat-plugin}</version>
                 <configuration>
                     <port>9090</port>
                     <path>/</path>

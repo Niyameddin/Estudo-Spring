@@ -45,7 +45,7 @@ public class BookRESTController {
         } else {
             try {
                 if (bookRepositoryService.hasEntity(new Long(bookDTO.getIsbn()))) {
-                    String message = responseConverter.convertMessageToJson(bookDTO, "Este ISBN jï¿½ foi cadastrado",
+                    String message = responseConverter.convertMessageToJson(bookDTO, "Este ISBN já foi cadastrado",
                             ResponseConverter.WARNING);
                     responseEntity = new ResponseEntity<String>(message, HttpStatus.BAD_REQUEST);
                 } else {

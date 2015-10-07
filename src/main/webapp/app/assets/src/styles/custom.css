@@ -172,6 +172,9 @@ input[type=number]:focus,
 }
 /* end forms */
 /* alert colors */
+.alert span {
+  font-size: 1.1em;
+}
 .alert-danger {
   background-color: #cc5148;
 }

@@ -1,6 +1,14 @@
     <div class="container">
         <h3 class="title"><i class="fa fa-book"></i> Listagem de Livros</h3>
 
+        <div class="alert alert-success alert-dismissible" role="alert" ng-if="!flashMessage == ''">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <span>
+                <strong ng-bind-template="{{flashMessage.defaultMessage}} : Título: {{flashMessage.objectAttributes.title}} e ISBN: {{flashMessage.objectAttributes.isbn}}"></strong>
+            </span>
+        </div>
         <table class="table table-hover table-bordered table-striped" 
             ng-if="hasBooks && errorMessage == ''">
             <div class="alert alert-warning" role="alert" ng-if="!hasBooks && !errorMessage">

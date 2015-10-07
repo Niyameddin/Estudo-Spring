@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module("bookcaseApp", ['ui.router','ngResource','ngStorage','ui.mask']);
+    angular.module("bookcaseApp", ['ui.router','ngStorage','ui.mask','restangular']);
 
     angular.module("bookcaseApp")
         .constant("$config",{
@@ -11,7 +11,10 @@
         });
 
     angular.module("bookcaseApp")
-        .config(function($stateProvider, $urlRouterProvider, $config){
+        .config(function($stateProvider, $urlRouterProvider, $config, RestangularProvider){
+          
+            RestangularProvider.setBaseUrl('http://localhost:9090/bookcase/api/');
+
             $stateProvider
             // Home Page
             .state('bookcase', {

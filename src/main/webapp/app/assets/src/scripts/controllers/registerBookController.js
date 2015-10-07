@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module("bookcaseApp")
-		.controller("registerBookController", function($scope,bookcaseService,$state){			
+		.controller("registerBookController", function($scope,$state,$localStorage,bookcaseService){
 			$scope.newBook = {isbn:"",
 							  title:"",
 							  author:"",
@@ -18,25 +18,29 @@
 			};
 
 			$scope.registerNewBook = function(book){
-				$scope.response = bookcaseService.createBook(book);										
-				if($scope.response){
-					if($scope.response.status == "SUCCESS"){
-						$scope.newBook = resetFields();
-						$state.transitionTo("books");
-					}else if($scope.response.status == "WARNING"){
-						alert("warning");						
+				bookcaseService.createBook(book).then(function(response){
+					var successResponse = response[Object.keys(response)[0]];
+					$scope.newBook = resetFields();
+					$localStorage.flashMessage = successResponse;
+					$state.transitionTo("books");
+
+				}, function(failedResponse){
+					var badResponse = failedResponse.data[Object.keys(failedResponse.data)[0]];
+					$scope.response = badResponse;
+					if(badResponse.status == "WARNING"){
+						console.log("WARNING");
+					}else if(badResponse.status == "ERROR"){
+						console.log("ERROR");
 					}else{
-						alert("error");						
+						$scope.response = {
+							status:"NULL",
+							objectType:"null",
+							objectAttributes:"null",
+							defaultMessage:"Houve um problema ao receber a resposta do servidor. "+
+							"Tente novamente daqui alguns instantes."
+						};
 					}
-				}else{
-					$scope.response = {
-						status:"NULL",
-						objectType:"null",
-						objectAttributes:"null",
-						defaultMessage:"Houve um problema ao receber a resposta do servidor. "+ 
-						"Tente novamente daqui alguns instantes."
-					};
-				}				
+				});
 			};
 		});
 }());
