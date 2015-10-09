@@ -42,7 +42,7 @@
             </div>
 
             <div class="form-group">
-                <input class="btn btn-default" type="submit" value="Atualizar livro">
+                <input class="btn btn-default" type="submit" value="Cadastrar livro">
             </div>
         </form:form>
     </section>

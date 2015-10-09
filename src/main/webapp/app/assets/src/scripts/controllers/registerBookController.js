@@ -7,7 +7,7 @@
 							  title:"",
 							  author:"",
 							  edition:""};
-
+			$scope.responseStyle = "";
 			$scope.response = {};
 
 			var resetFields = function(){
@@ -25,19 +25,21 @@
 					$state.transitionTo("books");
 
 				}, function(failedResponse){
-					var badResponse = failedResponse.data[Object.keys(failedResponse.data)[0]];
-					$scope.response = badResponse;
+					var badResponse = failedResponse.data[Object.keys(failedResponse.data)[0]];					
 					if(badResponse.status == "WARNING"){
-						console.log("WARNING");
+						$scope.responseStyle = "alert alert-warning";						
+						$scope.response = failedResponse.data;
 					}else if(badResponse.status == "ERROR"){
-						console.log("ERROR");
+						$scope.responseStyle = "alert alert-danger";
+						$scope.response = failedResponse.data;						
 					}else{
 						$scope.response = {
 							status:"NULL",
 							objectType:"null",
 							objectAttributes:"null",
 							defaultMessage:"Houve um problema ao receber a resposta do servidor. "+
-							"Tente novamente daqui alguns instantes."
+							"Tente novamente daqui alguns instantes.",
+							cssStyle:"alert alert-danger"
 						};
 					}
 				});

@@ -6,14 +6,14 @@
     angular.module("bookcaseApp")
         .constant("$config",{
             baseUrl:"http://localhost:9090",
-            bookApi: "/bookcase/api/books",
+            bookApi: "/bookcase/api/",
             projectName:"Estudo-Spring"
         });
 
     angular.module("bookcaseApp")
         .config(function($stateProvider, $urlRouterProvider, $config, RestangularProvider){
           
-            RestangularProvider.setBaseUrl('http://localhost:9090/bookcase/api/');
+            RestangularProvider.setBaseUrl($config.baseUrl+$config.bookApi);
 
             $stateProvider
             // Home Page

@@ -28,7 +28,7 @@ public class BookDTO implements Serializable {
 
     @NotEmpty
     @NotBlank
-    @Min(1)
+    @Min(value = 1, message = "Campo edição deve ser maior que zero")
     @Pattern(regexp = "^\\d{1,2}$")
     private String edition;
 

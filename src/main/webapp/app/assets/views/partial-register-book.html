@@ -1,9 +1,10 @@
     <div class="container">
         <h3 class="title"><i class="fa fa-book"></i> Cadastre um Livro</h3>
-        <div class="row col-md-12">
+        <div class="row">
+            <div class="col-md-8">
             <form method="post" id="registerBook" name="registerBook"
                 ng-submit="registerNewBook(newBook)" novalidate>
-                <div id="left" class="col-md-4">
+                <div id="left" class="col-md-6">
                     <div id="form-group" class="form-group-lg" ng-class="{'has-error': registerBook.field_isbn.$invalid && !registerBook.field_isbn.$pristine }">
                         <label for="field_isbn">ISBN</label>
                     	<input  type="text"
@@ -29,7 +30,7 @@
                                 required>
                     </div>
                 </div>
-                <div id="right" class="col-md-4">
+                <div id="right" class="col-md-6">
                     <div id="form-group" class="form-group-lg" ng-class="{'has-error': registerBook.field_author.$invalid && !registerBook.field_author.$pristine }">
                         <label for="field_author">Autor</label>
                         <input  type="text"
@@ -55,18 +56,24 @@
                                 required>
                     </div>
                     <br>
-                </div>
-                <div id="alertBox" class="col-md-4">
-                    <pre>{{response}}</pre>
-                    <pre>{{newBook}}</pre>
-                </div>
+                </div>                
                 <br>
-				<div id="form-group" class="form-group-lg col-md-8">
+				<div id="form-group" class="form-group-lg col-md-12">
                  	<button type="submit" ng-disabled="!registerBook.$valid"
                  	 class="form-control btn btn-success">
                         <i class="fa fa-floppy-o"></i> Cadastrar Livro
                     </button>
                 </div>
             </form>
+            </div>
+            <div class="col-md-4 scroll">
+                <div id="alertBox">
+                    <div ng-repeat="resp in response">
+                        <div class="{{$parent.responseStyle}}">
+                            <em ng-bind="resp.defaultMessage"></em>
+                        </div> 
+                    </div>                                       
+                </div>
+            </div>
         </div>
     </div>

@@ -111,6 +111,10 @@ body {
 table {
   background-color: white;
 }
+.scroll {
+  overflow-y: auto;
+  min-height: 230px;
+}
 /* end partials */
 /* forms */
 textarea:focus,

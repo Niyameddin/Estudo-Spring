@@ -15,16 +15,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import persistence.service.BookRepositoryService;
 
 import javax.transaction.Transactional;
-
 import java.util.Optional;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by guilherme on 14/09/15.

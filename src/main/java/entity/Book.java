@@ -37,7 +37,7 @@ public class Book implements Serializable {
 
     @Column(name = "edition", nullable = false)
     @NotNull
-    @Min(1)
+    @Min(value = 1)
     private Integer edition;
 
     public Book() {
