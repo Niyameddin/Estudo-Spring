@@ -31,3 +31,5 @@ $ sh client.sh
 - Lembre-se de criar um banco de dados mysql para que o projeto possa rodar. Você deverá configurar suas credênciais de acesso na classe **JPAConfiguration** do pacote **config**.
 - O projeto front-end está localizado na raiz do diretório **webapp** dentro da pasta **app**, seguindo o caminho: /src/main/webapp/
 
+###Screenshots:<br>
+<img src="https://raw.githubusercontent.com/gsag/Estudo-Spring/master/src/main/webapp/app/assets/dist/images/screenshots/screenshot01.png" width="400">
