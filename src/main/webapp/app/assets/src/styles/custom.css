@@ -170,6 +170,13 @@ input[type=number]:focus,
   -webkit-box-shadow: inset 0 -2px 0 #cc5148 !important;
   box-shadow: inset 0 -2px 0 #cc5148 !important;
 }
+.errorText div {
+  margin-top: 1em;
+  background-color: #ffd0cc;
+  color: #9f261d;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
 #form-group .ng-valid {
   -webkit-box-shadow: inset 0 -2px 0 #6dc47c !important;
   box-shadow: inset 0 -2px 0 #6dc47c !important;

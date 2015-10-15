@@ -17,6 +17,10 @@
                                 ui-mask="999-99-999-9999-9"
                                 maxlength="13"
                                 required>
+                        <div class="errorText" ng-messages="registerBook.field_isbn.$error" 
+                                ng-messages-multiple ng-show="registerBook.field_isbn.$touched">
+                            <div ng-messages-include="assets/views/partial-errors.html"></div>
+                        </div>
                     </div>
                     <br>
                     <div id="form-group" class="form-group-lg" ng-class="{'has-error': registerBook.field_title.$invalid && !registerBook.field_title.$pristine }">
@@ -27,7 +31,12 @@
                                 name="field_title"
                                 ng-model="newBook.title"
                                 placeholder="Digite o título do livro"
+                                ng-pattern="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ 0-9]+$/"
                                 required>
+                        <div class="errorText" ng-messages="registerBook.field_title.$error" 
+                                ng-messages-multiple ng-show="registerBook.field_title.$touched">
+                            <div ng-messages-include="assets/views/partial-errors.html"></div>
+                        </div>
                     </div>
                 </div>
                 <div id="right" class="col-md-6">
@@ -39,21 +48,40 @@
                                 name="field_author"
                                 ng-model="newBook.author"
                                 placeholder="Digite o autor deste livro"
+                                ng-pattern="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/"
                                 required>
+                        <div class="errorText" ng-messages="registerBook.field_author.$error" 
+                                ng-messages-multiple ng-show="registerBook.field_author.$touched">
+                            <div ng-messages-include="assets/views/partial-errors.html"></div>
+                            <div ng-message="pattern">Este campo aceita somente letras e espaços em branco</div>
+                        </div>
                     </div>
                     <br>
-                    <div id="form-group" class="form-group-lg" ng-class="{'has-error': registerBook.field_edition.$invalid && !registerBook.field_edition.$pristine }">
+                    <div id="form-group" class="form-group-lg" ng-class="{'has-error': registerBook.field_edition.$invalid && !registerBook.field_edition.$pristine}">
                         <label for="field_author">Edição</label>
-                        <input  type="text"
+                        <input  type="number"
                                 class="form-control"
                                 id="field_edition"
                                 name="field_edition"
                                 ng-model="newBook.edition"
                                 placeholder="Digite a edição deste livro"
-                                ui-mask-placeholder
-                                ui-mask="9?9"
-                                maxlength="2"
+                                min="1"
+                                max="99"
+                                ng-minlength="1"
+                                ng-maxlength="2"
                                 required>
+                        <div class="errorText" ng-messages="registerBook.field_edition.$error" 
+                                ng-messages-multiple ng-show="registerBook.field_edition.$touched">
+                            <div ng-messages-include="assets/views/partial-errors.html"></div>
+                            <div ng-message="min">O valor mínimo para este campo é 1</div>
+                            <div ng-message="max">O valor máximo para este campo é 99</div>
+                            <div ng-message="maxlength">
+                                O valor deste campo deve ter no máximo 2 dígitos
+                            </div>
+                            <div ng-message="minlength">
+                                O valor deste campo deve ter no mínimo 1 dígito
+                            </div>
+                        </div>
                     </div>
                     <br>
                 </div>                
@@ -69,7 +97,8 @@
             <div class="col-md-4 scroll">
                 <div id="alertBox">
                     <div ng-repeat="resp in response">
-                        <div class="{{$parent.responseStyle}}">
+                        <div class="{{$parent.responseStyle}} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <em ng-bind="resp.defaultMessage"></em>
                         </div> 
                     </div>                                       

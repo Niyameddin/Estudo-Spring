@@ -6,7 +6,7 @@
 				element.bind('click', ngHref);
 
 				function ngHref(event) {         	                               
-					event.target.href = $config.baseUrl+$config.bookApi;
+					event.target.href = $config.baseUrl+$config.bookApi+"books";
 				}
 			};
 		}]);
