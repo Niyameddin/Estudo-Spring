@@ -24,22 +24,26 @@
 					$localStorage.flashMessage = successResponse;
 					$state.transitionTo("books");
 
-				}, function(failedResponse){
-					var badResponse = failedResponse.data[Object.keys(failedResponse.data)[0]];					
-					if(badResponse.status == "WARNING"){
-						$scope.responseStyle = "alert alert-warning";						
-						$scope.response = failedResponse.data;
-					}else if(badResponse.status == "ERROR"){
-						$scope.responseStyle = "alert alert-danger";
-						$scope.response = failedResponse.data;						
+				}, function(failedResponse){					
+					if(failedResponse.data){
+						var badResponse = failedResponse.data[Object.keys(failedResponse.data)[0]];
+						if(badResponse.status == "WARNING"){
+							$scope.responseStyle = "alert alert-warning";						
+							$scope.response = failedResponse.data;
+						}else if(badResponse.status == "ERROR"){
+							$scope.responseStyle = "alert alert-danger";
+							$scope.response = failedResponse.data;						
+						}
 					}else{
+						$scope.responseStyle = "alert alert-danger";
 						$scope.response = {
-							status:"NULL",
-							objectType:"null",
-							objectAttributes:"null",
-							defaultMessage:"Houve um problema ao receber a resposta do servidor. "+
-							"Tente novamente daqui alguns instantes.",
-							cssStyle:"alert alert-danger"
+							0:{
+								status:"NULL",
+								objectType:"null",
+								objectAttributes:"null",
+								defaultMessage:"Houve um problema ao receber a resposta do servidor."+
+								"Tente novamente daqui alguns instantes."
+							}							
 						};
 					}
 				});
