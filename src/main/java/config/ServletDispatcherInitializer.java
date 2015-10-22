@@ -9,15 +9,15 @@ import javax.servlet.ServletException;
 /**
  * Created by Guilherme on 28/06/2015.
  */
-public class ServletSpringMVC extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class ServletDispatcherInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+        return new Class[]{ JPAConfiguration.class };
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{AppWebConfiguration.class, JPAConfiguration.class};
+        return new Class[]{ WebMvcConfiguration.class };
     }
 
     @Override

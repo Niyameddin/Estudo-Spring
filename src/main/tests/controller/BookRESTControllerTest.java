@@ -1,6 +1,6 @@
 package controller;
 
-import config.AppWebConfiguration;
+import config.WebMvcConfiguration;
 import config.DataSourceConfigurationTest;
 import config.JPAConfiguration;
 import entity.Book;
@@ -27,7 +27,7 @@ import java.util.Optional;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = {AppWebConfiguration.class, JPAConfiguration.class, DataSourceConfigurationTest.class})
+@ContextConfiguration(classes = {WebMvcConfiguration.class, JPAConfiguration.class, DataSourceConfigurationTest.class})
 @ActiveProfiles("test")
 public class BookRESTControllerTest {
 

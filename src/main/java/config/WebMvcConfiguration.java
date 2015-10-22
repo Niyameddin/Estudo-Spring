@@ -13,19 +13,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.FixedLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableWebMvc
 @EnableCaching
 @ComponentScan(basePackages = {"controller", "entity", "persistence", "util"})
-public class AppWebConfiguration extends WebMvcConfigurerAdapter {
+public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 
     /*
      * Configure View Resolver
@@ -59,6 +62,14 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
     }
 
     /*
+     * Configure Locale Resolver
+     */
+    @Bean
+    public LocaleResolver localeResolver() {
+        return new FixedLocaleResolver(new Locale("pt", "BR"));
+    }
+
+    /*
      * Configure caching manager
      */
     @Bean
@@ -79,5 +90,4 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter {
                 .allowCredentials(false)
                 .maxAge(3600);
     }
-
 }

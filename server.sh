@@ -2,5 +2,4 @@ echo "==============================="
 echo "Executando Servidor..."
 echo "==============================="
 echo ""
-mvn clean install
-mvn tomcat7:run
+mvn clean install tomcat7:run-war
