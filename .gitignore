@@ -57,12 +57,15 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-.idea/workspace.xml
 target/
-.idea/workspace.xml
 /.project
 /src/main/webapp/app/bower_components
 /src/main/webapp/app/node_modules
 /.fuse_hidden0000aea900000003
 /.fuse_hidden0000aea700000004
 /.fuse_hidden000081dd00000001
+
+#IDEA files
+**/.idea/workspace.xml 
+**/.idea/tasks.xml
+**/.idea/libraries
