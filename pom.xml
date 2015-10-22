@@ -4,7 +4,7 @@
     <groupId>com.spring</groupId>
     <artifactId>estudo-spring</artifactId>
     <packaging>war</packaging>
-    <version>1.2.0</version>
+    <version>1.2.1-RC3</version>
     <name>estudo-spring Maven Webapp</name>
     <url>http://maven.apache.org</url>
 
@@ -12,6 +12,9 @@
 
         <!-- Nome do Projeto -->
         <project-name>${project.artifactId}</project-name>
+
+        <!-- Java -->
+        <java.version>1.8</java.version>
 
         <!-- Encoding do projeto -->
         <project.build.sourceEncoding>cp1252</project.build.sourceEncoding>
@@ -206,8 +209,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin-version}</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                     <encoding>${maven-compiler-plugin-encoding}</encoding>
                 </configuration>
             </plugin>
