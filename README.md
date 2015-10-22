@@ -5,7 +5,12 @@ Projeto CRUD usando IntelliJ IDEA para estudos com Spring MVC.</br>
 Este projeto utiliza a integração de um módulo front-end em Angular JS com o back-end com Spring MVC RESTful, utilizando JSON como canal de comunicação.
 
 ### Como executar o projeto?
-> Você deve ter o node, o npm e o grunt instalados em seu repositório local.
+> As seguintes dependências são necessárias:
+- Java 8
+- NodeJS 0.12 ou maior
+- Maven 3
+- Bower
+- GruntJS
 
 *(lembre-se, você deve estar dentro da pasta do projeto)*
 ```shell
