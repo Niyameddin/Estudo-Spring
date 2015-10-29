@@ -24,12 +24,24 @@
                 <td class="text-center">Título</td>
                 <td class="text-center">Autor</td>
                 <td class="text-center">Edição</td>
+                <td class="text-center">Editar</td>
+                <td class="text-center">Excluir</td>
             </tr>
             <tr ng-repeat="book in books | orderBy: 'isbn'">
                 <td>{{book.isbn}}</td>
                 <td>{{book.title}}</td>
                 <td>{{book.author}}</td>
                 <td>{{book.edition}}</td>
+                <td class="col-md-1">
+                    <a class="btn btn-warning center-block">
+                        <i class="fa fa-pencil-square-o"></i> Editar
+                    </a>
+                </td>
+                <td class="col-md-1">
+                    <a class="btn btn-danger center-block" ng-click="deleteBook(book.isbn);">
+                        <i class="fa fa-trash"></i> Excluir
+                    </a>
+                </td>
             </tr>
         </table>
     </div>

@@ -4,7 +4,7 @@
     <groupId>com.spring</groupId>
     <artifactId>estudo-spring</artifactId>
     <packaging>war</packaging>
-    <version>1.2.1-RC3</version>
+    <version>1.2.0-RC4</version>
     <name>estudo-spring Maven Webapp</name>
     <url>http://maven.apache.org</url>
 

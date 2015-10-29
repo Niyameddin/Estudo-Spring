@@ -63,6 +63,29 @@ public class BookRESTController {
         return responseEntity;
     }
 
+    @CacheEvict(value = {"books", "apibook", "apibooks"}, allEntries = true)
+    @RequestMapping(value = "/delete/{isbn}", method = RequestMethod.DELETE)
+    public ResponseEntity<String> delete(@PathVariable("isbn") Long isbn){
+        ResponseEntity<String> responseEntity = null;
+        try {
+            Optional<Book> returnedBook = bookRepositoryService.findEntityById(isbn);
+            if(returnedBook.isPresent()){
+                Book book = returnedBook.get();
+                bookRepositoryService.deleteEntity(book);
+                String message = responseConverter.convertMessageToJson(book, "Livro deletado com sucesso",
+                        ResponseConverter.SUCCESS);
+                responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
+            }else{
+                String message = responseConverter.convertMessageToJson(returnedBook, "Livro inexistente. Impossível deletar!",
+                        ResponseConverter.ERROR);
+                responseEntity = new ResponseEntity<String>(message, HttpStatus.BAD_REQUEST);
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return responseEntity;
+    }
+
     @Cacheable(value = "apibook")
     @RequestMapping(value = "/books", method = RequestMethod.GET)
     public List<BookDTO> list() throws Exception {

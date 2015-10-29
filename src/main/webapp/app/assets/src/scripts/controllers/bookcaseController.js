@@ -1,13 +1,27 @@
 (function () {
     'use strict';
     angular.module("bookcaseApp")
-        .controller("bookcaseController", function($scope,bookcaseService,$localStorage,HTTPCache){
+        .controller("bookcaseController", function($scope,bookcaseService,$localStorage,HTTPCache,$state,$stateParams){
             $scope.errorMessage = "";
             $scope.books = {};
             $scope.hasBooks = true;
             $scope.flashMessage = "";
 
-            var loadBooks = function(){
+            $scope.deleteBook = function(isbn){
+                bookcaseService.deleteBook(isbn).then(function(response){
+                    var successResponse = response[Object.keys(response)[0]];
+                    $localStorage.flashMessage = successResponse;
+                    $state.transitionTo($state.current, $stateParams, {
+                        reload: true,
+                        inherit: false,
+                        notify: true
+                    });
+                }, function(error){
+
+                }).finally(function(){});
+            };
+
+            var loadBooks = function(){                
                 bookcaseService.getBooks().then(function(data){
                     $scope.books = data;
                 }, function(error){

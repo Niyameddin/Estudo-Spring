@@ -186,16 +186,20 @@ input[type=number]:focus,
 .alert span {
   font-size: 1.1em;
 }
-.alert-danger {
+.alert-danger,
+.btn-danger {
   background-color: #cc5148;
 }
-.alert-warning {
+.alert-warning,
+.btn-warning {
   background-color: #cc9048;
 }
-.alert-info {
+.alert-info,
+.btn-info {
   background-color: #5f8aa3;
 }
-.alert-success {
+.alert-success,
+.btn-success {
   background-color: #6dc47c;
 }
 /* end alert colors */
