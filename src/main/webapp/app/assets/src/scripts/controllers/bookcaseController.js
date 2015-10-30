@@ -7,20 +7,6 @@
             $scope.hasBooks = true;
             $scope.flashMessage = "";
 
-            $scope.deleteBook = function(isbn){
-                bookcaseService.deleteBook(isbn).then(function(response){
-                    var successResponse = response[Object.keys(response)[0]];
-                    $localStorage.flashMessage = successResponse;
-                    $state.transitionTo($state.current, $stateParams, {
-                        reload: true,
-                        inherit: false,
-                        notify: true
-                    });
-                }, function(error){
-
-                }).finally(function(){});
-            };
-
             var loadBooks = function(){                
                 bookcaseService.getBooks().then(function(data){
                     $scope.books = data;
@@ -41,6 +27,27 @@
             var loadLocalFlashMessage = function(){
                 $scope.flashMessage = $localStorage.flashMessage;
                 delete $localStorage.flashMessage;
+            };
+            var removeFromBookList = function(index){
+                if (index > -1) $scope.books.splice(index,1);
+                return $scope.books;            
+            };
+            $scope.deleteBook = function(book){
+                bookcaseService.deleteBook(book.isbn).then(function(response){
+                    var successResponse = response[Object.keys(response)[0]];
+                    $localStorage.flashMessage = successResponse;                    
+                    var index = $scope.books.indexOf(book);
+                    $scope.books = removeFromBookList(index);
+                    $state.transitionTo($state.current, $stateParams, {
+                        reload: true,
+                        inherit: false,
+                        notify: true
+                    });                    
+                    console.log(book); 
+                    console.log($scope.books);                                
+                }, function(error){
+
+                });
             };
         });
 }());
