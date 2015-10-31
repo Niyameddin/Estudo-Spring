@@ -13,7 +13,7 @@
 	           Restangular.setDefaultHttpFields({cache: cache});
 
 	           Restangular.setResponseInterceptor(function(response, operation) {
-	               if (operation === 'put' || operation === 'post' || operation === 'delete') {
+	               if (operation === 'put' || operation === 'post' || operation === 'remove') {
 	                   cache.removeAll();
 	               }
 	               return response;

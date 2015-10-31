@@ -1,11 +1,12 @@
 (function () {
     'use strict';
     angular.module("bookcaseApp")
-        .controller("bookcaseController", function($scope,bookcaseService,$localStorage,HTTPCache,$state,$stateParams){
+        .controller("bookcaseController", function($scope,bookcaseService,$localStorage,
+                                                    HTTPCache,$state,$stateParams){
             $scope.errorMessage = "";
             $scope.books = {};
             $scope.hasBooks = true;
-            $scope.flashMessage = "";
+            $scope.flashMessage = "";                    
 
             var loadBooks = function(){                
                 bookcaseService.getBooks().then(function(data){
@@ -16,12 +17,14 @@
                 }).finally(function(){
                     hasBooksLoaded();
                     loadLocalFlashMessage();
-                    HTTPCache.init();
+                    cacheInit();
                 });
             }();
             var hasBooksLoaded = function(){
                 if($scope.books.length === 0){
                     $scope.hasBooks = false;
+                }else{
+                    $scope.hasBooks = true;
                 }
             };
             var loadLocalFlashMessage = function(){
@@ -30,24 +33,26 @@
             };
             var removeFromBookList = function(index){
                 if (index > -1) $scope.books.splice(index,1);
-                return $scope.books;            
+                hasBooksLoaded();                       
             };
             $scope.deleteBook = function(book){
                 bookcaseService.deleteBook(book.isbn).then(function(response){
                     var successResponse = response[Object.keys(response)[0]];
                     $localStorage.flashMessage = successResponse;                    
                     var index = $scope.books.indexOf(book);
-                    $scope.books = removeFromBookList(index);
+                    removeFromBookList(index);
                     $state.transitionTo($state.current, $stateParams, {
                         reload: true,
                         inherit: false,
                         notify: true
-                    });                    
-                    console.log(book); 
-                    console.log($scope.books);                                
+                    });                                                             
                 }, function(error){
-
+                    $scope.errorMessage = "Aconteceu um problema ao resgatar os dados do servidor. " +
+                     "Tente novamente mais tarde. ";
                 });
+            };
+            var cacheInit = function(){
+                return HTTPCache.init();
             };
         });
 }());
