@@ -37,4 +37,4 @@ $ sh client.sh
 - O projeto front-end está localizado na raiz do diretório **webapp** dentro da pasta **app**, seguindo o caminho: /src/main/webapp/
 
 ###Screenshots:<br>
-<img src="https://raw.githubusercontent.com/gsag/Estudo-Spring/master/src/main/webapp/app/assets/dist/images/screenshots/screenshot01.png" width="400">
+<img src="https://raw.githubusercontent.com/gsag/Estudo-Spring/master/src/main/webapp/app/assets/src/images/screenshots/screenshot01.png" width="400">
