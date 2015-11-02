@@ -1,7 +1,8 @@
 (function () {
     'use strict';
 
-    angular.module("bookcaseApp", ['ui.router','ngStorage','ui.mask','restangular','ngMessages']);
+    angular.module("bookcaseApp", ['ui.router','ngStorage','ui.mask','restangular','ngMessages',
+                                   'angularUtils.directives.dirPagination']);
 
     angular.module("bookcaseApp")
         .constant("$config",{
@@ -12,7 +13,7 @@
 
     angular.module("bookcaseApp")
         .config(function($stateProvider, $urlRouterProvider, $config, RestangularProvider){
-          
+            
             RestangularProvider.setBaseUrl($config.baseUrl+$config.bookApi);
 
             $stateProvider

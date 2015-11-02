@@ -9,6 +9,21 @@
                 <strong ng-bind-template="{{flashMessage.defaultMessage}} : Título: {{flashMessage.objectAttributes.title}} e ISBN: {{flashMessage.objectAttributes.isbn}}"></strong>
             </span>
         </div>
+        <div class="row">
+            <div class="col-md-4">
+               <h5>Página atual: {{ pagination.currentPage }}</h5>
+            </div>
+            <div class="col-md-4">
+               <label for="search">Procurar por:</label>
+               <input ng-model="query" id="search" class="form-control" placeholder="Título, ISBN, autor?">
+            </div>
+            <div class="col-md-4">
+               <label for="amount">Livros por página:</label>               
+               <input type="number" min="1" max="100" class="form-control" ng-model="pagination.pageSize"
+                minlength="1" maxlength="3" pattern="[1-9]{1,3}">
+            </div>
+        </div>
+        <br/>
         <table class="table table-hover table-bordered table-striped" 
             ng-if="hasBooks && errorMessage == ''">
             <div class="alert alert-warning" role="alert" ng-if="!hasBooks && !errorMessage">
@@ -26,8 +41,9 @@
                 <td class="text-center">Edição</td>
                 <td class="text-center">Editar</td>
                 <td class="text-center">Excluir</td>
-            </tr>
-            <tr ng-repeat="book in books | orderBy: 'isbn'">
+            </tr>            
+            <tr dir-paginate="book in books | orderBy: 'isbn' | filter: query | itemsPerPage: pagination.pageSize" 
+                current-page="pagination.currentPage">
                 <td>{{book.isbn}}</td>
                 <td>{{book.title}}</td>
                 <td>{{book.author}}</td>
@@ -44,4 +60,10 @@
                 </td>
             </tr>
         </table>
+        <div class="text-center">
+            <dir-pagination-controls
+                boundary-links="true" 
+                template-url="assets/views/dirPagination.tpl.html">
+            </dir-pagination-controls>
+        </div>
     </div>

@@ -3,13 +3,13 @@
 	angular.module("bookcaseApp")
 		.service("bookcaseService", function(BookApi,Restangular){
 			var _getBooks = function(){				
-				return BookApi.getList();
+				return BookApi.getAll().getList();
 			};
 			var _createBook = function(newBook){
-				return BookApi.post(newBook);
+				return BookApi.getAll().post(newBook);
 			};
 			var _deleteBook = function(isbn){
-				return Restangular.one("delete",isbn).remove();
+				return Restangular.getOne("delete",isbn).remove();
 			};
 			return{
 				getBooks: _getBooks,

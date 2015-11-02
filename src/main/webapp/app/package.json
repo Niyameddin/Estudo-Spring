@@ -1,6 +1,6 @@
 {
   "name": "estudo-spring",
-  "version": "1.2.0-RC4",
+  "version": "1.2.1-RC4",
   "title": "estudo-spring",
   "description": "A bookcase manager app",
   "homepage": "http://github.com/gsag/estudo-spring",
@@ -22,7 +22,7 @@
     "grunt-contrib-cssmin": "~0.14.0",
     "grunt-contrib-jshint": "~0.11.2",
     "grunt-contrib-less": "^1.0.1",
-    "grunt-contrib-uglify": "~0.9.1",
+    "grunt-contrib-uglify": "~0.10.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-express": "~1.4.1",
     "grunt-open": "~0.2.3",
