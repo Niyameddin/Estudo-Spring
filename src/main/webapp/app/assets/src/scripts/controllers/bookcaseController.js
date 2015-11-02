@@ -8,6 +8,7 @@
             $scope.hasBooks = true;
             $scope.flashMessage = "";
 
+            $scope.searchText = "";
             $scope.pagination = {
                 currentPage: 1,
                 pageSize: 5

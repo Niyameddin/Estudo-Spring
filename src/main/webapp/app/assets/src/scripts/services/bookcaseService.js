@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 	angular.module("bookcaseApp")
-		.service("bookcaseService", function(BookApi,Restangular){
+		.service("bookcaseService", function(BookApi){
 			var _getBooks = function(){				
 				return BookApi.getAll().getList();
 			};
@@ -9,7 +9,7 @@
 				return BookApi.getAll().post(newBook);
 			};
 			var _deleteBook = function(isbn){
-				return Restangular.getOne("delete",isbn).remove();
+				return BookApi.getOne("delete",isbn).remove();
 			};
 			return{
 				getBooks: _getBooks,

@@ -15,7 +15,7 @@
             </div>
             <div class="col-md-4">
                <label for="search">Procurar por:</label>
-               <input ng-model="query" id="search" class="form-control" placeholder="Título, ISBN, autor?">
+               <input ng-model="searchText" id="search" class="form-control" placeholder="Título, ISBN, autor?">
             </div>
             <div class="col-md-4">
                <label for="amount">Livros por página:</label>               
@@ -24,42 +24,47 @@
             </div>
         </div>
         <br/>
-        <table class="table table-hover table-bordered table-striped" 
-            ng-if="hasBooks && errorMessage == ''">
-            <div class="alert alert-warning" role="alert" ng-if="!hasBooks && !errorMessage">
-                <span>Não há nenhum livro a ser visualizado.</span>
+        <div ng-switch="(books | filter:searchText).length">            
+            <div class="alert alert-warning" role="alert" ng-switch-when="0" ng-if="!hasBooks && !errorMessage">
+                <span><i class="fa fa-question-circle"></i> Nenhum livro foi encontrado...</span>
             </div>
-            <div class="alert alert-danger" role="error" ng-if="!errorMessage == ''">
-                <span ng-cloak>
-                    <i class="fa fa-exclamation-circle"></i> {{errorMessage}}
-                </span>
-            </div>
-            <tr>
-                <td class="text-center">ISBN</td>
-                <td class="text-center">Título</td>
-                <td class="text-center">Autor</td>
-                <td class="text-center">Edição</td>
-                <td class="text-center">Editar</td>
-                <td class="text-center">Excluir</td>
-            </tr>            
-            <tr dir-paginate="book in books | orderBy: 'isbn' | filter: query | itemsPerPage: pagination.pageSize" 
-                current-page="pagination.currentPage">
-                <td>{{book.isbn}}</td>
-                <td>{{book.title}}</td>
-                <td>{{book.author}}</td>
-                <td>{{book.edition}}</td>
-                <td class="col-md-1">
-                    <a class="btn btn-warning center-block">
-                        <i class="fa fa-pencil-square-o"></i> Editar
-                    </a>
-                </td>
-                <td class="col-md-1">
-                    <a class="btn btn-danger center-block" ng-click="deleteBook(book);">
-                        <i class="fa fa-trash"></i> Excluir
-                    </a>
-                </td>
-            </tr>
-        </table>
+            <table class="table table-hover table-bordered table-striped" 
+                ng-if="hasBooks && errorMessage == ''" ng-switch-default>
+
+                <div class="alert alert-warning" role="alert" ng-if="!hasBooks && !errorMessage">
+                    <span>Não há nenhum livro a ser visualizado.</span>
+                </div>
+                <div class="alert alert-danger" role="error" ng-if="!errorMessage == ''">
+                    <span ng-cloak>
+                        <i class="fa fa-exclamation-circle"></i> {{errorMessage}}
+                    </span>
+                </div>            
+                <tr>
+                    <td class="text-center">ISBN</td>
+                    <td class="text-center">Título</td>
+                    <td class="text-center">Autor</td>
+                    <td class="text-center">Edição</td>
+                    <td class="text-center">Editar</td>
+                    <td class="text-center">Excluir</td>
+                </tr>            
+                <tr dir-paginate="book in books | orderBy: 'isbn' | filter: searchText |    itemsPerPage: pagination.pageSize" current-page="pagination.currentPage">
+                    <td>{{book.isbn}}</td>
+                    <td>{{book.title}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.edition}}</td>
+                    <td class="col-md-1">
+                        <a class="btn btn-warning center-block">
+                            <i class="fa fa-pencil-square-o"></i> Editar
+                        </a>
+                    </td>
+                    <td class="col-md-1">
+                        <a class="btn btn-danger center-block" ng-click="deleteBook(book);">
+                            <i class="fa fa-trash"></i> Excluir
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <div class="text-center">
             <dir-pagination-controls
                 boundary-links="true" 
