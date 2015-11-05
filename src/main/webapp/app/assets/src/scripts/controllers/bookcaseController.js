@@ -8,6 +8,8 @@
             $scope.hasBooks = true;
             $scope.flashMessage = "";
 
+            $scope.preUpdatedModel = {};
+
             $scope.searchText = "";
             $scope.pagination = {
                 currentPage: 1,
@@ -58,6 +60,9 @@
                     $scope.errorMessage = "Aconteceu um problema ao resgatar os dados do servidor. " +
                      "Tente novamente mais tarde. ";
                 });
+            };
+            $scope.copyBookModel = function(book){                
+                $scope.preUpdatedModel = angular.copy(book);
             };
             var cacheInit = function(){
                 return HTTPCache.init();

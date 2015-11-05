@@ -186,12 +186,10 @@ input[type=number]:focus,
 .alert span {
   font-size: 1.1em;
 }
-.alert-danger,
-.btn-danger {
+.alert-danger {
   background-color: #cc5148;
 }
-.alert-warning,
-.btn-warning {
+.alert-warning {
   background-color: #cc9048;
 }
 .alert-info,
@@ -203,6 +201,22 @@ input[type=number]:focus,
   background-color: #6dc47c;
 }
 /* end alert colors */
+/* button colors */
+.btn-danger {
+  background-color: #cc5148;
+}
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: #9f261d;
+}
+.btn-warning {
+  background-color: #cc9048;
+}
+.btn-warning:hover,
+.btn-warning:focus {
+  background-color: #9f641d;
+}
+/* end button colors */
 /* pagination */
 .pagination .active a {
   background-color: #6dc47c;

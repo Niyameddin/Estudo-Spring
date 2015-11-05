@@ -149,12 +149,12 @@
 			font-size: @default-font-size;
 		}
 	}
-	.alert-danger, .btn-danger {
-    	background-color: @color-danger;
+	.alert-danger{
+		background-color: @color-danger;
 	}
-	.alert-warning, .btn-warning {
-    	background-color: @color-warning;
-	}
+	.alert-warning{
+		background-color: @color-warning;
+	}	
 	.alert-info, .btn-info {
     	background-color: @color-info;
 	}
@@ -162,6 +162,21 @@
     	background-color: @color-success;
 	}
 	/* end alert colors */
+
+	/* button colors */
+	.btn-danger {
+    	background-color: @color-danger;
+    	&:hover,&:focus{
+    		background-color: @color-complement-3;
+    	}
+	}
+	.btn-warning {
+    	background-color: @color-warning;
+    	&:hover,&:focus{
+    		background-color: @color-secondary-2-3;
+    	}
+	}
+	/* end button colors */ 
 
 	/* pagination */
 	.pagination >{
