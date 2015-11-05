@@ -8,6 +8,7 @@ Este projeto utiliza a integração de um módulo front-end em Angular JS com o 
 > As seguintes dependências são necessárias:
 - Java 8
 - NodeJS 0.12 ou maior
+- NPM (Node Package Manager)
 - Maven 3
 - Bower
 - GruntJS
