@@ -64,6 +64,29 @@ public class BookRESTController {
     }
 
     @CacheEvict(value = {"books", "apibook", "apibooks"}, allEntries = true)
+    @RequestMapping(value = "/books", method = RequestMethod.PUT)
+    public ResponseEntity<String> update(@RequestBody @Valid BookDTO bookDTO, BindingResult result) {
+        Book book = null;
+        ResponseEntity<String> responseEntity = null;
+        if(result.hasErrors()){
+            String errors = responseConverter.convertErrorListToJson(result.getAllErrors(),ResponseConverter.ERROR);
+            responseEntity = new ResponseEntity<String>(errors,HttpStatus.BAD_REQUEST);
+        }else{
+            try {
+                book = bookFactory.createBook(bookDTO);
+                bookRepositoryService.updateEntity(book);
+
+                String message = responseConverter.convertMessageToJson(book, "Livro atualizado com sucesso",
+                        ResponseConverter.SUCCESS);
+                responseEntity = new ResponseEntity<String>(message, HttpStatus.OK);
+            } catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        }
+        return responseEntity;
+    }
+
+    @CacheEvict(value = {"books", "apibook", "apibooks"}, allEntries = true)
     @RequestMapping(value = "/delete/{isbn}", method = RequestMethod.DELETE)
     public ResponseEntity<String> delete(@PathVariable("isbn") Long isbn){
         ResponseEntity<String> responseEntity = null;

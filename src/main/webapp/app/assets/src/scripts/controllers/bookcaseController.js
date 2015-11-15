@@ -62,7 +62,22 @@
                 });
             };
             $scope.copyBookModel = function(book){                
-                $scope.preUpdatedModel = angular.copy(book);
+                $scope.preUpdatedModel = bookcaseService.copyBook(book);
+            };
+            $scope.updateBook = function(book){
+                bookcaseService.updateBook(book).then(function(response){
+                    var successResponse = response[Object.keys(response)[0]];                    
+                    $localStorage.flashMessage = successResponse;                                                            
+                }).finally(function(){
+                    $('#modalEdicao').modal('hide');
+                    $('#modalEdicao').on('hidden.bs.modal', function(event) {
+                        $state.transitionTo($state.current, $stateParams, {
+                            reload: true,
+                            inherit: false,
+                            notify: true
+                        });
+                    });
+                });
             };
             var cacheInit = function(){
                 return HTTPCache.init();
